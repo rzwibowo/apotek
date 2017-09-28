@@ -18,7 +18,11 @@
 		{
 			# code...
 			$data['obat']=$this->md_obat->get_obat()->result();
+			$this->load->view('layout/head_include');
+			$this->load->view('layout/head_navbar');
 			$this->load->view('obat/vw_obat',$data);
+			$this->load->view('layout/foot_footer');
+			$this->load->view('layout/foot_include');
 		}
 
 		function add_obat()
@@ -62,7 +66,7 @@
 			# code...
 			$where=array('id'=>$id);
 			$data['user']=$this->md_obat->edit_obat($where,'user')->result();
-			$this->load->view('obat/v_edit',$data);
+			$this->load->view('obat/vw_edit',$data);
 		}
 
 		function update_action()

@@ -2,16 +2,17 @@
 	defined('BASEPATH')	or exit('ga boleh ada direct script');
 
 	/**
-	* 
+	*
 	*/
 	class Obat extends CI_Controller
 	{
-		
+
 		function __construct()
 		{
 			# code...
 			parent::__construct();
 			$this->load->model('md_obat');
+			$this->load->model('md_gol_obat');
 		}
 
 		function index()
@@ -28,7 +29,12 @@
 		function add_obat()
 		{
 			# code...
-			$this->load->view('obat/vw_add');
+			$data['obat_gol']=$this->md_gol_obat->get_gol_obat()->result();
+			$this->load->view('layout/head_include');
+			$this->load->view('layout/head_navbar');
+			$this->load->view('obat/vw_obat_add',$data);
+			$this->load->view('layout/foot_footer');
+			$this->load->view('layout/foot_include');
 		}
 
 		function add_action()
@@ -39,18 +45,18 @@
 			$nama_obat=$this->input->post('nama_obat');
 			$stok_obat=$this->input->post('stok_obat');
 			$harga_satuan=$this->input->post('harga_satuan');
-			$kadaluarsa=$this->input->post('kadaluarsa');
+			$kadaluarsa=$this->input->post('tgl_kadaluarsa');
 
 			$data=array(
                 'gol_obat'=>$gol_obat,
 				'nama_obat'=>$nama_obat,
 				'stok_obat'=>$stok_obat,
                 'harga_satuan'=>$harga_satuan,
-                'kadaluarsa'=>$kadaluarsa
+                'tgl_kadaluarsa'=>$kadaluarsa
 			);
 
 			$this->md_obat->insert_obat($data,'obat');
-			redirect('obat/vw_obat');
+			redirect('obat/index');
 		}
 
 		function delete($id)

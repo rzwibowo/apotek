@@ -31,6 +31,12 @@
 			</tbody>
 			<?php }	?>
 		</table>
-
+		<nav class="level">
+				<div class="level-right">
+						<div class="level-item">
+								<?php echo anchor('obat/add_obat','<i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Tambah Data','class="button is-primary"'); ?>
+						</div>
+				</div>
+		</nav>
 	</div>
 </section>

@@ -21,9 +21,9 @@
 					<td><?php echo $g->kd_gol ?></td>
 					<td><?php echo $g->golongan ?></td>
 					<td>
-                        <?php echo anchor('gol_obat/edit/'.$g->kd_gol,'<i class="fa fa-pencil" aria-hidden="true"></i>','class="button is-info"'); ?>
-                        <?php echo anchor('gol_obat/delete/'.$g->kd_gol,'<i class="fa fa-trash" aria-hidden="true"></i>','class="button is-danger"'); ?>
-                    </td>
+                        <?php echo anchor('gol_obat/edit/'.$g->id_gol,'<i class="fa fa-pencil" aria-hidden="true"></i>','class="button is-info"'); ?>
+                        <?php echo anchor('gol_obat/view/'.$g->id_gol,'<i class="fa fa-info" aria-hidden="true"></i>','class="button is-primary"'); ?>
+          </td>
 				</tr>
 			</tbody>
 			<?php }	?>

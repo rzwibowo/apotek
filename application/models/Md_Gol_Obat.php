@@ -1,10 +1,10 @@
 <?php
 	/**
-	* 
+	*
 	*/
 	class Md_Gol_Obat extends CI_Model
 	{
-		
+
 		function get_gol_obat()
 		{
             # code...
@@ -35,6 +35,11 @@
 			# code...
 			$this->db->where($where);
 			$this->db->update($table,$data);
+		}
+		function GatById($where)
+		{
+			# code...
+			return $this->db->get_where('obat_gol',$where);
 		}
 	}
 ?>

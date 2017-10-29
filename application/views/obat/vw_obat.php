@@ -16,17 +16,21 @@
 
 			<?php
 				$no=1;
-				foreach($obat as $o){
+				foreach($obat as $row){
 			?>
 			<tbody>
 				<tr>
 					<td><?php echo $no++ ?></td>
-					<td><?php echo $o->kd_obat ?></td>
-					<td><?php echo $o->nama_obat ?></td>
-					<td><?php echo $o->golongan ?></td>
-					<td><?php echo $o->stok_obat ?></td>
-					<td><?php echo $o->harga_satuan ?></td>
-					<td><?php echo $o->tgl_kadaluarsa ?></td>
+					<td><?php echo $row->kode_obat ?></td>
+					<td><?php echo $row->nama_obat ?></td>
+					<td><?php echo $row->golongan ?></td>
+					<td><?php echo $row->stok_obat ?></td>
+					<td><?php echo $row->harga_satuan ?></td>
+					<td><?php echo $row->tgl_kadaluarsa ?></td>
+					<td>
+                        <?php echo anchor('obat/edit/'.$row->id_obat,'<i class="fa fa-pencil" aria-hidden="true"></i>','class="button is-info"'); ?>
+                        <?php echo anchor('obat/view/'.$row->id_obat,'<i class="fa fa-info" aria-hidden="true"></i>','class="button is-info"'); ?>
+          </td>
 				</tr>
 			</tbody>
 			<?php }	?>

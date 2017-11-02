@@ -1,76 +1,66 @@
-<div class="section">
-    <div class="container">
-              <div class="field is-horizontal">
-                  <div class="field-label is-normal">
-                      <label class="label">Kode Obat</label>
-                  </div>
-                  <div class="field-body">
-                      <div class="control">
-                          <label class="label"><?php echo $obat[0]->kode_obat?></label>
-                      </div>
-                  </div>
-              </div>
-            <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                    <label class="label">Golongan Obat</label>
-                </div>
-                <div class="field-body">
-                    <div class="control">
-                        <label class="label"><?php echo $obat[0]->golongan?></label>
-                    </div>
-                </div>
-            </div>
-            <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                    <label class="label">Nama Obat</label>
-                </div>
-                <div class="field-body">
-                    <div class="control">
-                      <label class="label"> <?php echo $obat[0]->nama_obat?></label>
-                    </div>
-                </div>
-            </div>
-            <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                    <label class="label">Stok Obat</label>
-                </div>
-                <div class="field-body">
-                    <div class="control">
-                        <label class="label"><?php echo $obat[0]->stok_obat?></label>
-                    </div>
-                </div>
-            </div>
-            <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                    <label class="label">Harga Satuan</label>
-                </div>
-                <div class="field-body">
-                    <div class="control">
-                      <label class="label"><?php echo $obat[0]->harga_satuan?></label>
-                    </div>
-                </div>
-            </div>
-            <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                    <label class="label">Tanggal Kadaluarsa</label>
-                </div>
-                <div class="field-body">
-                    <div class="control">
-                      <label class="label"><?php echo $obat[0]->tgl_kadaluarsa  ?></label>
-                    </div>
-                </div>
-            </div>
-            <div class="field is-horizontal">
-                <div class="field-label">
-                    <!-- Left empty for spacing -->
-                </div>
-                <div class="field-body">
-                    <div class="field">
-                        <div class="control">
-                            <button class="button is-info" onclick="goBack()">Kembali</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
+<div class="page-header">
+    <h1>Data Obat <?php echo $obat[0]->nama_obat?></h1>
 </div>
+
+<div class="form-group row">
+    
+        <label class="col-form-label col-md-3">Kode Obat</label>
+<div class="col-md-9">
+
+
+    <input type="text" readonly class="form-control-plaintext" value="<?php echo $obat[0]->kode_obat?>"/>
+
+</div>
+</div>
+
+<div class="form-group row">
+<label class="col-form-label col-md-3">Golongan Obat</label>
+<div class="col-md-9">
+
+
+<input type="text" readonly class="form-control-plaintext" value="<?php echo $obat[0]->golongan?>"/>
+
+
+</div>
+</div>
+<div class="form-group row">
+<label class="col-form-label col-md-3">Nama Obat</label>
+<div class="col-md-9">
+
+
+<input type="text" readonly class="form-control-plaintext" value="<?php echo $obat[0]->nama_obat?>"/>
+
+</div>
+
+</div>
+<div class="form-group row">
+<label class="col-form-label col-md-3">Stok Obat</label>
+<div class="col-md-9">
+
+
+<input type="text" readonly class="form-control-plaintext" value="<?php echo $obat[0]->stok_obat?>"/>
+
+</div>
+
+</div>
+<div class="form-group row">
+<label class="col-form-label col-md-3">Harga Satuan</label>
+<div class="col-md-9">
+
+
+<input type="text" readonly class="form-control-plaintext" value="<?php echo $obat[0]->harga_satuan?>"/>
+
+
+</div>
+</div>
+<div class="form-group row">
+<label class="col-form-label col-md-3">Tanggal Kadaluarsa</label>
+<div class="col-md-9">
+
+
+<input type="text" readonly class="form-control-plaintext" value="<?php echo $obat[0]->tgl_kadaluarsa  ?>"/>
+
+</div>
+</div>
+
+        <button class="btn btn-outline-secondary" onclick="goBack()">Kembali</button>

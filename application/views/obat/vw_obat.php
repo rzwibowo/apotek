@@ -13,6 +13,7 @@
 				<th>Stok</th>
 				<th>Harga Satuan</th>
 				<th>Tanggal Kadaluarsa</th>
+				<th></th>
 			</tr>
 		</thead>
 		
@@ -29,17 +30,25 @@
 				<td><?php echo $row->stok_obat ?></td>
 				<td><?php echo $row->harga_satuan ?></td>
 				<td><?php echo $row->tgl_kadaluarsa ?></td>
-				<td>
+				<td class="text-center">
 					<?php echo anchor('obat/edit/'.$row->id_obat,'<i class="fa fa-pencil" aria-hidden="true"></i>','class="btn btn-outline-warning"'); ?>
 					<?php echo anchor('obat/view/'.$row->id_obat,'<i class="fa fa-info" aria-hidden="true"></i>','class="btn btn-outline-info"'); ?>
 				</td>
 			</tr>
 			<?php }	?>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="7">
+					<?php echo $this->pagination->create_links(); ?>
+				</td>
+				<td class="text-right">
+					<?php echo anchor('obat/add_obat','<i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Tambah Data','class="btn btn-primary"'); ?>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
 </div>
-<div class="pull-right">
-	<?php echo anchor('obat/add_obat','<i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Tambah Data','class="btn btn-primary"'); ?>
-</div>
-<?php echo $this->pagination->create_links(); ?>
+<!-- <div class="pull-right">
+</div> -->
 

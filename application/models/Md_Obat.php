@@ -5,13 +5,26 @@
 	class Md_Obat extends CI_Model
 	{
 
-		function get_obat()
+		function get_obat($angka,$batas)
 		{
             # code...
             $this->db->select('*');
             $this->db->from('obat');
-            $this->db->join('obat_gol', 'obat_gol.id_gol = obat.id_gol');
+			$this->db->join('obat_gol', 'obat_gol.id_gol = obat.id_gol');
+			$this->db->limit($angka,$batas);
 			return $this->db->get();
+		}
+
+		function data($angka,$batas)
+		{
+			# code...
+			return $query=$this->db->get('obat',$angka,$batas)->result();
+		}
+
+		function jml_data()
+		{
+			# code...
+			return $this->db->get('obat')->num_rows();
 		}
 
 		function insert_obat($data,$table)

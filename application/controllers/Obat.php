@@ -18,7 +18,19 @@
 		function index()
 		{
 			# code...
-			$data['obat']=$this->md_obat->get_obat()->result();
+			$jml_data=$this->md_obat->jml_data();
+			$this->load->library('pagination');
+			$config['base_url']=base_url().'index.php/obat/index/';
+			$config['total_rows']=$jml_data;
+			$config['per_page']=10;
+			$config['attributes'] = array('class' => 'page-link');
+			
+			$from=$this->uri->segment(3);
+			$this->pagination->initialize($config);
+			// $data['obat']+=$this->md_obat->data($config['per_page'],$from);
+
+			$data['obat']=$this->md_obat->get_obat($config['per_page'],$from)->result();
+			
 			$this->load->view('layout/head_include');
 			$this->load->view('layout/head_navbar');
 			$this->load->view('obat/vw_obat',$data);

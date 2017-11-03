@@ -18,7 +18,7 @@
 		
 		<tbody>
 			<?php
-				$no=1;
+				$no=$this->uri->segment('3')+1;
 				foreach($obat as $row){
 			?>
 			<tr>
@@ -38,5 +38,8 @@
 		</tbody>
 	</table>
 </div>
-<?php echo anchor('obat/add_obat','<i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Tambah Data','class="btn btn-primary"'); ?>
+<div class="pull-right">
+	<?php echo anchor('obat/add_obat','<i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Tambah Data','class="btn btn-primary"'); ?>
+</div>
+<?php echo $this->pagination->create_links(); ?>
 

@@ -4,7 +4,7 @@
 
 <div class="col-md-8 offset-md-2">
     <form action="<?php echo base_url().'index.php/obat/update_action'; ?>" method="post">
-        <input class="form-control" name="id_obat" type="hidden" value="<?php echo $obat[0]->id_obat ?>">
+        <input name="id_obat" type="hidden" value="<?php echo $obat[0]->id_obat ?>">
         <div class="form-group row">
             <label class="col-form-label col-sm-3">Golongan Obat</label>
             <div class="col-sm-6">

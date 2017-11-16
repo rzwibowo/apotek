@@ -1,5 +1,5 @@
-<div class="page-header">
-    <h1>Data Obat <?php echo $obat[0]->nama_obat?></h1>
+<div class="page-head text-center">
+    <h1>Detail Obat <?php echo $obat[0]->nama_obat?></h1>
 </div>
 
 <div class="form-group row">

@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-head text-center">
 	<h1>Daftar Obat</h1>
 </div>
 
@@ -48,6 +48,34 @@
 			</tr>
 		</tfoot>
 	</table>
+</div>
+
+<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalForm">Buka Modal Form</button>
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalFormLabel">Form di dalam modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+			<label class="col-form-label">Data Pertama</label>
+			<input type="text" class="form-control" name="dataPtm">
+		</div>
+		<div class="form-group">
+		<label class="col-form-label">Data Kedua</label>
+			<input type="text" class="form-control" name="dataKda">
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <button type="button" class="btn btn-primary">Simpan</button>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- <div class="pull-right">
 </div> -->

@@ -19,8 +19,17 @@
 		</thead>
 
 		<tbody>
-			<tr>
+			<tr v-for="(obat,index) in Obat['obat']">
+        <td>{{index + 1}}</td>
+        <td>{{obat.kode_obat}}</td>
+        <td>{{obat.nama_obat}}</td>
+        <td>{{obat.golongan}}</td>
+        <td>{{obat.stok_obat}}</td>
+        <td>{{obat.harga_satuan}}</td>
+        <td>{{obat.tgl_kadaluarsa}}</td>
 				<td class="text-center">
+          <a href="#"  class="btn btn-outline-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+					<a href="#"  class="btn btn-outline-info"> <i class="fa fa-info" aria-hidden="true"></i></a>
 				</td>
 			</tr>
 		</tbody>
@@ -29,7 +38,7 @@
 				<td colspan="7">
 				</td>
 				<td class="text-right">
-					<button class="btn btn-primary"> <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</button>
+					<button class="btn btn-primary" v-on:click="GetDataObat"> <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</button>
 				</td>
 			</tr>
 		</tfoot>

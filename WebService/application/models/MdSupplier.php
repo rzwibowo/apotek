@@ -18,10 +18,16 @@
 			return $this->db->get();
 		}
 
-		function InsertSupplier($data,$table)
+		function InsertSupplier($Data,$Table)
 		{
 			# code...
-			$this->db->insert($table,$data);
+			if($this->db->insert($Table,$Data)){
+				return true;
+			}else {
+				# code...
+				return false;
+			}
+
 		}
 
 		function DeleteSupplier($where,$table)
@@ -36,14 +42,19 @@
 			# code...
 			return $this->db->get_where($table,$where);
 		}
-		function GetSupplierByID($where){
-			return $this->db->get_where("supplier",$where);
+		function GetById($Where){
+			return $this->db->get_where("Supplier",$Where);
 		}
-		function UpdateSupplier($where,$data,$table)
+		function UpdateSupplier($Where,$Data,$Table)
 		{
 			# code...
-			$this->db->where($where);
-			$this->db->update($table,$data);
+			$this->db->where($Where);
+			if($this->db->update($Table,$Data)){
+				return true;
+			}else {
+				# code...
+				return false;
+			}
 		}
 	}
 ?>

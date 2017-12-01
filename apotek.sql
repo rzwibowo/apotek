@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 29 Okt 2017 pada 06.12
+-- Generation Time: 01 Des 2017 pada 02.30
 -- Versi Server: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -21,6 +21,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `apotek`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `golongan`
+--
+
+CREATE TABLE `golongan` (
+  `IdGolongan` int(11) NOT NULL,
+  `KodeGolongan` char(4) NOT NULL,
+  `Golongan` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data untuk tabel `golongan`
+--
+
+INSERT INTO `golongan` (`IdGolongan`, `KodeGolongan`, `Golongan`) VALUES
+(1, 'yad', 'agak waras'),
+(2, '0w', 'Kb'),
+(3, '3DS', 'sdsdds'),
+(4, '3DG', 'sadsd'),
+(5, 'SE3', 'Golongan'),
+(6, 'SE2', 'Golongan'),
+(7, 'SE2', 'Golongan');
 
 -- --------------------------------------------------------
 
@@ -47,49 +72,24 @@ INSERT INTO `jabatan` (`kd_jbt`, `nama_jbt`) VALUES
 --
 
 CREATE TABLE `obat` (
-  `id_obat` int(11) NOT NULL,
-  `id_gol` int(11) NOT NULL,
-  `nama_obat` varchar(30) NOT NULL,
-  `stok_obat` int(11) NOT NULL,
-  `harga_satuan` int(11) NOT NULL,
-  `tgl_kadaluarsa` date NOT NULL,
-  `kode_obat` varchar(25) NOT NULL
+  `IdObat` int(11) NOT NULL,
+  `IdGolongan` int(11) NOT NULL,
+  `NamaObat` varchar(30) NOT NULL,
+  `StokObat` int(11) NOT NULL,
+  `HargaSatuan` int(11) NOT NULL,
+  `TanggalKadaluarsa` date NOT NULL,
+  `KodeObat` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `obat`
 --
 
-INSERT INTO `obat` (`id_obat`, `id_gol`, `nama_obat`, `stok_obat`, `harga_satuan`, `tgl_kadaluarsa`, `kode_obat`) VALUES
-(39, 2, 'sadsd', 432, 2323, '2017-09-01', '2Da'),
-(40, 1, 'asasas', 32, 23, '2017-09-01', '2Da'),
-(42, 1, 'sdsd', 23, 2323, '2017-09-01', 'y00041'),
-(43, 3, 'Manjur', 23, 2323, '2017-09-01', '3DS00043'),
-(44, 2, 'sdsd', 23, 2323, '2017-10-11', '0w00044'),
-(45, 3, 'Manjur', 23, 23, '2017-09-01', '3DS00045'),
-(46, 4, 'sdsd', 23, 2323, '2017-10-11', '3DG00046');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `obat_gol`
---
-
-CREATE TABLE `obat_gol` (
-  `id_gol` int(11) NOT NULL,
-  `kd_gol` char(4) NOT NULL,
-  `golongan` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
---
--- Dumping data untuk tabel `obat_gol`
---
-
-INSERT INTO `obat_gol` (`id_gol`, `kd_gol`, `golongan`) VALUES
-(1, 'y', 'agak waras'),
-(2, '0w', 'Kb'),
-(3, '3DS', 'sdsdds'),
-(4, '3DG', 'sadsd');
+INSERT INTO `obat` (`IdObat`, `IdGolongan`, `NamaObat`, `StokObat`, `HargaSatuan`, `TanggalKadaluarsa`, `KodeObat`) VALUES
+(39, 2, 'xxxxxx1', 432, 2323, '2017-09-01', '2Da'),
+(40, 1, 'aaaaaa', 32, 23, '2017-09-01', '2Da'),
+(42, 1, 'Rizki', 23, 2323, '2017-09-01', 'y00041'),
+(43, 2, 'Obat Kb', 20, 100, '2017-11-16', '0w00043');
 
 -- --------------------------------------------------------
 
@@ -119,11 +119,12 @@ INSERT INTO `pegawai` (`id_pegawai`, `nama_pgw`, `jenis_kel`, `kode_jbt`, `alama
 --
 
 CREATE TABLE `pembelian` (
-  `no_beli` int(11) NOT NULL,
-  `tgl_beli` date NOT NULL,
-  `id_supplier` char(4) NOT NULL,
-  `total_harga_beli` int(11) NOT NULL,
-  `total_jml_obat` int(11) NOT NULL
+  `IdPembelian` int(11) NOT NULL,
+  `TanggalPembelian` date NOT NULL,
+  `IdSupplier` char(4) NOT NULL,
+  `TotalHargaBeli` int(11) NOT NULL,
+  `TotalJumlahObat` int(11) NOT NULL,
+  `StatusPembelian` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -133,11 +134,12 @@ CREATE TABLE `pembelian` (
 --
 
 CREATE TABLE `pembelian_detail` (
-  `no_detail_beli` int(11) NOT NULL,
-  `no_beli` int(11) NOT NULL,
-  `kd_obat` int(11) NOT NULL,
-  `jml_obat` int(11) NOT NULL,
-  `harga_satuan` int(11) NOT NULL
+  `IdDetailPembelian` int(11) NOT NULL,
+  `IdPembelian` int(11) NOT NULL,
+  `IdObat` int(11) NOT NULL,
+  `JumlahObat` int(11) NOT NULL,
+  `HargaPembelian` int(11) NOT NULL,
+  `Status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -175,14 +177,14 @@ CREATE TABLE `penjualan_detail` (
 --
 
 CREATE TABLE `persediaan` (
-  `id_persediaan` int(11) NOT NULL,
-  `tgl` date NOT NULL,
-  `transaksi` enum('keluar','masuk','saldo') NOT NULL,
-  `kuantitas` int(11) NOT NULL,
-  `harga_satuan` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL,
-  `no_detail_jual` int(11) NOT NULL,
-  `no_detail_beli` int(11) NOT NULL
+  `IdPersediaan` int(11) NOT NULL,
+  `TanggalTransaksi` date NOT NULL,
+  `Transaksi` enum('keluar','masuk','saldo') NOT NULL,
+  `Kualitas` int(11) NOT NULL,
+  `HargaSatuan` int(11) NOT NULL,
+  `Jumlah` int(11) NOT NULL,
+  `NomorDetailPenjualan` int(11) NOT NULL,
+  `NomorDetailPembelian` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -192,11 +194,21 @@ CREATE TABLE `persediaan` (
 --
 
 CREATE TABLE `supplier` (
-  `id_supplier` char(4) NOT NULL,
-  `nama_sup` varchar(30) NOT NULL,
-  `alamat` text NOT NULL,
-  `no_tel` varchar(14) NOT NULL
+  `IdSupplier` int(11) NOT NULL,
+  `NamaSupplier` varchar(30) NOT NULL,
+  `NomorTelepon` varchar(14) NOT NULL,
+  `Status` tinyint(1) NOT NULL,
+  `Alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `supplier`
+--
+
+INSERT INTO `supplier` (`IdSupplier`, `NamaSupplier`, `NomorTelepon`, `Status`, `Alamat`) VALUES
+(1, 'Joko', '+6281327206692', 1, 'Jalan R.A.Kartini No. 9, RT. 10 / RW. 4, Cilandak Barat, Cilandak, RT.10/RW.4, Cilandak Bar., Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12440'),
+(2, 'Joko Supprapto', '+6281327206692', 0, 'Jalan R.A.Kartini No. 9, RT. 10 / RW. 4, Cilandak Barat, Cilandak, RT.10/RW.4, Cilandak Bar., Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12440'),
+(3, 'Supplier Baru', '098888', 0, 'ok');
 
 -- --------------------------------------------------------
 
@@ -223,17 +235,17 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `hak_akses`) VALUES
 --
 
 --
+-- Indexes for table `golongan`
+--
+ALTER TABLE `golongan`
+  ADD PRIMARY KEY (`IdGolongan`);
+
+--
 -- Indexes for table `obat`
 --
 ALTER TABLE `obat`
-  ADD PRIMARY KEY (`id_obat`),
-  ADD KEY `obat_ibfk_1` (`id_gol`);
-
---
--- Indexes for table `obat_gol`
---
-ALTER TABLE `obat_gol`
-  ADD PRIMARY KEY (`id_gol`);
+  ADD PRIMARY KEY (`IdObat`),
+  ADD KEY `obat_ibfk_1` (`IdGolongan`);
 
 --
 -- Indexes for table `pegawai`
@@ -245,13 +257,13 @@ ALTER TABLE `pegawai`
 -- Indexes for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  ADD PRIMARY KEY (`no_beli`);
+  ADD PRIMARY KEY (`IdPembelian`);
 
 --
 -- Indexes for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  ADD PRIMARY KEY (`no_detail_beli`);
+  ADD PRIMARY KEY (`IdDetailPembelian`);
 
 --
 -- Indexes for table `penjualan`
@@ -269,7 +281,13 @@ ALTER TABLE `penjualan_detail`
 -- Indexes for table `persediaan`
 --
 ALTER TABLE `persediaan`
-  ADD PRIMARY KEY (`id_persediaan`);
+  ADD PRIMARY KEY (`IdPersediaan`);
+
+--
+-- Indexes for table `supplier`
+--
+ALTER TABLE `supplier`
+  ADD PRIMARY KEY (`IdSupplier`);
 
 --
 -- Indexes for table `user`
@@ -282,15 +300,15 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `golongan`
+--
+ALTER TABLE `golongan`
+  MODIFY `IdGolongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
---
--- AUTO_INCREMENT for table `obat_gol`
---
-ALTER TABLE `obat_gol`
-  MODIFY `id_gol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdObat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `pegawai`
 --
@@ -300,12 +318,12 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `no_beli` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdPembelian` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `no_detail_beli` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdDetailPembelian` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
@@ -320,7 +338,12 @@ ALTER TABLE `penjualan_detail`
 -- AUTO_INCREMENT for table `persediaan`
 --
 ALTER TABLE `persediaan`
-  MODIFY `id_persediaan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdPersediaan` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `supplier`
+--
+ALTER TABLE `supplier`
+  MODIFY `IdSupplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -334,7 +357,7 @@ ALTER TABLE `user`
 -- Ketidakleluasaan untuk tabel `obat`
 --
 ALTER TABLE `obat`
-  ADD CONSTRAINT `obat_ibfk_1` FOREIGN KEY (`id_gol`) REFERENCES `obat_gol` (`id_gol`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `obat_ibfk_1` FOREIGN KEY (`IdGolongan`) REFERENCES `golongan` (`IdGolongan`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

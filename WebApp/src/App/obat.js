@@ -67,15 +67,7 @@ export default {
       this.OpenModal('ModalObatView');
     },
     GetDataById(IdObat,IsEdit){
-      this.Obat= {
-        IdObat: null,
-        IdGolongan: "",
-        NamaObat: null,
-        StokObat: null,
-        HargaSatuan:null,
-        TanggalKadaluarsa:null,
-        KodeObat:null,
-      },
+      this.Obat= { },
       axios.get('http://localhost/apotek/WebService/index.php/api/obat/GatDataObatById/'+IdObat+'/'+IsEdit)
       .then(response => {
         // JSON responses are automatically parsed.
@@ -96,7 +88,7 @@ export default {
         TanggalKadaluarsa:null,
         KodeObat:null,
       },
-      OpenModal ('ModalObatForm');
+      this.OpenModal ('ModalObatForm');
     },
     OpenModal (Modal){
       $('#'+Modal).modal('show');

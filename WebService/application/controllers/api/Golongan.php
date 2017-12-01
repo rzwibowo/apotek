@@ -1,101 +1,54 @@
 <?php
-	defined('BASEPATH')	or exit('ga boleh ada direct script');
-	require APPPATH . '/libraries/REST_Controller.php';
-	use Restserver\Libraries\REST_Controller;
-	/**
-	*
-	*/
-	class Golongan extends REST_Controller
+defined('BASEPATH')	or exit('ga boleh ada direct script');
+require APPPATH . '/libraries/REST_Controller.php';
+use Restserver\Libraries\REST_Controller;
+/**
+*
+*/
+class Golongan extends REST_Controller
+{
+
+	function __construct($config = 'rest')
 	{
-
-		function __construct($config = 'rest')
-		{
-			# code...
-			parent::__construct($config);
-			$this->load->model('ModelGolongan');
-		}
-
-		function GetGolonganAll_get()
-		{
-			# code...
-      $data=$this->ModelGolongan->GetGolongan()->result();
-      $this->response($data, 200);
-		}
-    //
-		// function add_gol_obat()
-		// {
-    //         # code...
-    //         $this->load->view('layout/head_include');
-		// 				$this->load->view('layout/head_navbar');
-    //         $this->load->view('gol_obat/vw_gol_add');
-    //         $this->load->view('layout/foot_footer');
-		// 				$this->load->view('layout/foot_include');
-		// }
-    //
-		// function add_action()
-		// {
-		// 	# code...
-		// 	$kd_gol=$this->input->post('kd_gol');
-		// 	$golongan=$this->input->post('golongan');
-    //
-		// 	$data=array(
-    //             'kd_gol'=>$kd_gol,
-		// 						'golongan'=>$golongan
-		// 	);
-    //
-		// 	$this->md_gol_obat->insert_gol_obat($data,'obat_gol');
-		// 	redirect('gol_obat/index');
-		// }
-    //
-		// function delete($kd_gol)
-		// {
-		// 	# code...
-		// 	$where=array('kd_gol'=>$kd_gol);
-		// 	$this->md_gol_obat->delete_gol_obat($where,'obat_gol');
-		// 	redirect('gol_obat/index');
-		// }
-    //
-		// function edit($id)
-		// {
-		// 	# code...
-		// 	$where=array('id_gol'=>$id);
-		// 	$data['gol_obat']=$this->md_gol_obat->edit_gol_obat($where,'obat_gol')->result();
-    //
-		// 	$this->load->view('layout/head_include');
-		// 	$this->load->view('layout/head_navbar');
-		// 	$this->load->view('gol_obat/vw_gol_edit',$data);
-    //  $this->load->view('layout/foot_footer');
-		// 	$this->load->view('layout/foot_include');
-		// }
-    //
-		// function update_action()
-		// {
-		// 	# code...
-		// 	$kd_gol=$this->input->post('kd_gol');
-		// 	$golongan=$this->input->post('golongan');
-    //
-		// 	$data=array(
-    //             'kd_gol'=>$kd_gol,
-		// 						'golongan'=>$golongan
-		// 	);
-    //
-		// 	$where=array(
-		// 		'kd_gol'=>$kd_gol
-		// 	);
-    //
-		// 	$this->md_gol_obat->update_gol_obat($where,$data,'obat_gol');
-		// 	redirect('gol_obat/index');
-		// }
-		// function view($id)
-		// {
-		// 	# code...
-		// 	$where=array('id_gol'=>$id);
-		// 	$data['gol_obat']=$this->md_gol_obat->edit_gol_obat($where,'obat_gol')->result();
-		// 	$this->load->view('layout/head_include');
-		// 	$this->load->view('layout/head_navbar');
-		// 	$this->load->view('gol_obat/vw_gol_view',$data);
-		//  $this->load->view('layout/foot_footer');
-		// 	$this->load->view('layout/foot_include');
-		// }
+		# code...
+		parent::__construct($config);
+		$this->load->model('ModelGolongan');
 	}
+
+	function GetGolonganAll_get()
+	{
+		# code...
+		$data=$this->ModelGolongan->GetGolongan()->result();
+		$this->response($data, 200);
+	}
+
+	function SaveDataGolongan_post()
+	{
+		# code...
+		$Golongan= (object) $this->post('body');
+		if($Golongan->IdGolongan == null){
+			if($this->ModelGolongan->InsertGolongan($Golongan,'Golongan')){
+				$this->response(array('status' => 'sukses'), 200);
+			}else{
+				$this->response(array('error' => 'Error saat simpan data'), 404);
+			}
+		}else {
+			$Where=array(
+				'IdGolongan'=>$Golongan->IdGolongan
+			);
+			if($this->ModelGolongan->UpdateGolongan($Where,$Golongan,'Golongan')){
+				$this->response(array('status' => 'sukses'), 200);
+			}else{
+				$this->response(array('error' => 'Error saat simpan data'), 404);
+			}
+		}
+	}
+	function GetDataGolonganById_get($Id)
+	{
+		# code...
+		$where=array('IdGolongan'=>$Id);
+		$Golongan=$this->ModelGolongan->GatById($where,'Golongan')->result();
+		$this->response($Golongan[0], 200);
+	}
+}
 ?>

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Obat from '@/components/Obat'
+import Golongan from '@/components/Golongan'
+import Supplier from '@/components/Supplier'
 
 Vue.use(Router)
 
@@ -16,6 +18,16 @@ export default new Router({
       path: '/obat',
       name: 'Obat',
       component: Obat
+    },
+    {
+      path: '/golongan',
+      name: 'Golongan',
+      component: Golongan
+    },
+    {
+      path: '/supplier',
+      name: 'Supplier',
+      component: Supplier
     }
   ]
 })

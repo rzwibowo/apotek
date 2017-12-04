@@ -47,7 +47,12 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-3">Tanggal Kadaluarsa</label>
             <div class="col-sm-4">
-                <input class="form-control" name="tgl_kadaluarsa" type="date" placeholder="Ketik Tanggal kadaluarsa" value="<?php echo $obat[0]->tgl_kadaluarsa;?>">
+                <div class="input-group">
+                    <input class="form-control tanggal" name="tgl_kadaluarsa" type="text" placeholder="Ketik Tanggal kadaluarsa" value="<?php echo $obat[0]->tgl_kadaluarsa;?>">
+                    <span class="input-group-addon tanggal-btn">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
             </div>
         </div>
         

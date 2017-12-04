@@ -5,3 +5,7 @@
 .content {
     min-height: 35rem;
 }
+
+.tanggal-btn {
+    cursor: pointer;
+}

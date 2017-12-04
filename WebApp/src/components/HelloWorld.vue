@@ -14,6 +14,7 @@
       <ul><router-link to="/obat" >Obat</router-link></ul>
       <ul><router-link to="/golongan" >Golongan</router-link></ul>
       <ul><router-link to="/supplier" >Supplier</router-link></ul>
+      <ul><router-link to="/pembelian" >Pembelian</router-link></ul>
       <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
       <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 01 Des 2017 pada 02.30
+-- Generation Time: 04 Des 2017 pada 04.06
 -- Versi Server: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -127,13 +127,20 @@ CREATE TABLE `pembelian` (
   `StatusPembelian` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `pembelian`
+--
+
+INSERT INTO `pembelian` (`IdPembelian`, `TanggalPembelian`, `IdSupplier`, `TotalHargaBeli`, `TotalJumlahObat`, `StatusPembelian`) VALUES
+(117, '2017-12-08', '3', 306292, 10, 0);
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembelian_detail`
+-- Struktur dari tabel `pembeliandetail`
 --
 
-CREATE TABLE `pembelian_detail` (
+CREATE TABLE `pembeliandetail` (
   `IdDetailPembelian` int(11) NOT NULL,
   `IdPembelian` int(11) NOT NULL,
   `IdObat` int(11) NOT NULL,
@@ -141,6 +148,14 @@ CREATE TABLE `pembelian_detail` (
   `HargaPembelian` int(11) NOT NULL,
   `Status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pembeliandetail`
+--
+
+INSERT INTO `pembeliandetail` (`IdDetailPembelian`, `IdPembelian`, `IdObat`, `JumlahObat`, `HargaPembelian`, `Status`) VALUES
+(6, 117, 39, 4, 32323, 0),
+(7, 117, 42, 3, 55000, 0);
 
 -- --------------------------------------------------------
 
@@ -260,9 +275,9 @@ ALTER TABLE `pembelian`
   ADD PRIMARY KEY (`IdPembelian`);
 
 --
--- Indexes for table `pembelian_detail`
+-- Indexes for table `pembeliandetail`
 --
-ALTER TABLE `pembelian_detail`
+ALTER TABLE `pembeliandetail`
   ADD PRIMARY KEY (`IdDetailPembelian`);
 
 --
@@ -318,12 +333,12 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `IdPembelian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 --
--- AUTO_INCREMENT for table `pembelian_detail`
+-- AUTO_INCREMENT for table `pembeliandetail`
 --
-ALTER TABLE `pembelian_detail`
-  MODIFY `IdDetailPembelian` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pembeliandetail`
+  MODIFY `IdDetailPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `penjualan`
 --

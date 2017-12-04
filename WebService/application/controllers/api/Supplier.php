@@ -46,15 +46,6 @@ class Supplier extends REST_Controller
 			}
 		}
 	}
-	// }
-	// 	// function delete($id)
-	// 	// {
-	// 	// 	# code...
-	// 	// 	$where=array('id'=>$id);
-	// 	// 	$this->md_obat->delete_obat($where,'user');
-	// 	// 	redirect('obat/vw_obat');
-	// 	// }
-	//
 		function GatDataSupplierById_get($Id)
 		{
 			# code...

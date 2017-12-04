@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Obat from '@/components/Obat'
 import Golongan from '@/components/Golongan'
 import Supplier from '@/components/Supplier'
+import Pembelian from '@/components/Pembelian'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/supplier',
       name: 'Supplier',
       component: Supplier
+    },
+    {
+      path: '/Pembelian',
+      name: 'pembelian',
+      component: Pembelian
     }
   ]
 })

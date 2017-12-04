@@ -7,7 +7,7 @@ import moment from 'moment'
 
 Vue.config.productionTip = false
 
-Vue.filter('formatDate', function(value) {
+Vue.filter('formatDate', function (value) {
   if (value) {
     return moment(String(value)).format('DD MMM YYYY')
   }

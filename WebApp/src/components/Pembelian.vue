@@ -20,8 +20,8 @@
             <td>{{index + 1}}</td>
             <td>{{Pembelians.TanggalPembelian | formatDate}}</td>
             <td>{{Pembelians.NamaSupplier}}</td>
-            <td>{{Pembelians.TotalJumlahObat}}</td>
-            <td>{{Pembelians.TotalHargaBeli}}</td>
+            <td class="jml">{{Pembelians.TotalJumlahObat}}</td>
+            <td class="harga">{{Pembelians.TotalHargaBeli}}</td>
             <td class="text-center">
               <a  v-on:click="EditPembelian(Pembelians.IdPembelian)"  class="btn btn-outline-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
               <a  v-on:click="ViewPembelian(Pembelians.IdPembelian)" class="btn btn-outline-info"> <i class="fa fa-info" aria-hidden="true"></i></a>
@@ -30,7 +30,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="7">
+            <td colspan="5">
             </td>
             <td class="text-right">
               <button class="btn btn-primary" v-on:click="AddPembelian"> <i class="fa fa-plus" aria-hidden="true"></i>Pembelian Baru</button>
@@ -40,9 +40,9 @@
       </table>
     </div>
     <!--Form modal-->
-    <div class="modal fade" id="ModalPembelianForm" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true" style="margin:auto;">
+    <div class="modal fade" id="ModalPembelianForm" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
-        <div class="modal-content" style="width: 1300px; margin-left: -400px;">
+        <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalFormLabel">Form Data Pembelian</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -52,14 +52,14 @@
           <div class="modal-body">
             <form>
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Tanggal Pembelian</label>
-                <div class="col-sm-3">
+                <label class="col-form-label col-sm-5">Tanggal Pembelian</label>
+                <div class="col-sm-6">
                   <input class="form-control" name="NamaPembelian" v-model="Pembelian.TanggalPembelian" type="date">
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Nama Supplier</label>
-                <div class="col-sm-4">
+                <label class="col-form-label col-sm-5">Nama Supplier</label>
+                <div class="col-sm-6">
                   <select name="Golongan" v-model="Pembelian.IdSupplier" class="form-control">
                     <option value=''>Pilih</option>
                     <option v-for="option in Suppliers" :value="option.IdSupplier">{{option.NamaSupplier}}</option>
@@ -67,15 +67,18 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Total Jumlah Obat</label>
+                <label class="col-form-label col-sm-5">Total Jumlah Obat</label>
                 <div class="col-sm-3">
                   <input class="form-control" name="NomerTelepon" v-model="Pembelian.TotalJumlahObat" type="text"  disabled="true">
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Total Harga Beli</label>
-                <div class="col-sm-3">
-                  <input class="form-control" name="NomerTelepon" v-model="Pembelian.TotalHargaBeli" type="text" maxlength="30" disabled="true">
+                <label class="col-form-label col-sm-5">Total Harga Beli</label>
+                <div class="col-sm-6">
+                  <div class="input-group">
+                    <span class="input-group-addon">Rp</span>
+                    <input class="form-control" name="NomerTelepon" v-model="Pembelian.TotalHargaBeli" type="text" maxlength="30" disabled="true">
+                  </div>
                 </div>
               </div>
 
@@ -190,7 +193,10 @@
 </template>
 <script src="../App/Pembelian.js"></script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+  td.jml{
+    text-align: right;
+  }
 /*h1, h2 {
 font-weight: normal;
 }

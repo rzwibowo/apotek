@@ -4,14 +4,14 @@
       <h1>Daftar Supplier</h1>
     </div>
     <div class="table-responsive">
-      <table class="table table-hover">
+      <table class="table table-hover" style="margin: 0 auto;">
         <thead>
           <tr>
             <th>No.</th>
             <th>Nama Supplier</th>
             <th>Nomor Telepon</th>
             <th>Status</th>
-            <th>Alamat</th>
+            <th style="width: 35em">Alamat</th>
             <th></th>
           </tr>
         </thead>
@@ -19,7 +19,7 @@
         <tbody>
           <tr v-for="(suppliers,index) in Suppliers">
             <td>{{index + 1}}</td>
-            <td>{{suppliers.NamaSupplier}}</td>
+            <td><a  v-on:click="ViewSupplier(suppliers.IdSupplier)" href="#" >{{suppliers.NamaSupplier}}</a>
             <td>{{suppliers.NomorTelepon}}</td>
             <td>{{suppliers.Status ==1? "Aktif":"Non Aktif" }}</td>
             <td>{{suppliers.Alamat}}</td>
@@ -31,7 +31,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="7">
+            <td colspan="5">
             </td>
             <td class="text-right">
               <button class="btn btn-primary" v-on:click="AddSupplier"> <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</button>
@@ -45,7 +45,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalFormLabel">Form Data Supplier</h5>
+            <h5 class="modal-title" id="modalFormLabel">Edit Supplier {{Supplier.NamaSupplier}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -53,33 +53,37 @@
           <div class="modal-body">
             <form>
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Nama Supplier</label>
+                <label class="col-form-label col-sm-5">Nama Supplier</label>
                 <div class="col-sm-6">
                   <input class="form-control" name="NamaSupplier" v-model="Supplier.NamaSupplier" type="text" placeholder="Ketik Nama Supplier" maxlength="30">
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Nomor Telepon</label>
+                <label class="col-form-label col-sm-5">Nomor Telepon</label>
                 <div class="col-sm-6">
                   <input class="form-control" name="NomerTelepon" v-model="Supplier.NomorTelepon" type="text" placeholder="Ketik NomorTelepon" maxlength="30">
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Status</label>
-                <div class="col-sm-3">
-                  <label class="radio-inline">
-                    <input type="radio" name="Status" v-model="Supplier.Status" value="1" >Aktif
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="Status" v-model="Supplier.Status" value="0" >Non Aktif
-                  </label>
+                <label class="col-form-label col-sm-5">Status</label>
+                <div class="col-sm-6">
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="Status" v-model="Supplier.Status" value="1" > Aktif
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="Status" v-model="Supplier.Status" value="0" > Non Aktif
+                    </label>
+                  </div>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Alamat</label>
-                <div class="col-sm-4">
+                <label class="col-form-label col-sm-5">Alamat</label>
+                <div class="col-sm-6">
                   <textarea class="form-control" rows="5" id="Alamat" v-model="Supplier.Alamat" ></textarea>
                 </div>
               </div>
@@ -99,7 +103,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalFormLabel">View Data Supplier</h5>
+            <h5 class="modal-title" id="modalFormLabel">Detail Supplier {{Supplier.NamaSupplier}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -107,29 +111,29 @@
           <div class="modal-body">
             <form>
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Nama Supplier</label>
-                <div class="col-sm-4">
-                  <label class="col-form-label">{{Supplier.NamaSupplier}}</label>
+                <label class="col-form-label col-sm-5">Nama Supplier</label>
+                <div class="col-sm-6">
+                  <input readonly class="form-control-plaintext datatampil" :value="Supplier.NamaSupplier">
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Nomor Telepon</label>
-                <div class="col-sm-4">
-                  <label class="col-form-label">{{Supplier.NomorTelepon}}</label>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-form-label col-sm-3">Status Supplier</label>
-                <div class="col-sm-4">
-                  <label class="col-form-label">{{Supplier.Status ==1?"Aktife":"Non Aktif"}}</label>
+                <label class="col-form-label col-sm-5">Nomor Telepon</label>
+                <div class="col-sm-6">
+                  <input readonly class="form-control-plaintext datatampil" :value="Supplier.NomorTelepon">
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-form-label col-sm-3">Alamat</label>
-                <div class="col-sm-4">
-                  <label class="col-form-label">{{Supplier.Alamat}}</label>
+                <label class="col-form-label col-sm-5">Status Supplier</label>
+                <div class="col-sm-6">
+                  <input readonly class="form-control-plaintext datatampil" :value="Supplier.Status ==1?'Aktif':'Non Aktif'">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Alamat</label>
+                <div class="col-sm-6">
+                  <p class="datatampil">{{Supplier.Alamat}}</p>
                 </div>
               </div>
             </form>

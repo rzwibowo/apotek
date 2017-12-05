@@ -12,12 +12,15 @@ class ModelObat extends CI_Model
 		$this->load->model('ModelGolongan');
 	}
 
-	function GetObat($Angka,$Batas)
+	function GetObat($Angka,$Batas,$Filter)
 	{
 		# code...
 		$this->db->select('*');
 		$this->db->from('Obat');
 		$this->db->join('Golongan', 'Golongan.IdGolongan = Obat.IdGolongan');
+		if(count($Filter) > 0){
+			$this->db->like($Filter);
+		}
 		$this->db->limit($Angka,$Batas);
 	return $this->db->get();
 }

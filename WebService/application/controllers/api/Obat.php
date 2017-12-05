@@ -16,8 +16,9 @@ class Obat extends REST_Controller
 		$this->load->model('ModelGolongan');
 	}
 
-	function GetDataObat_get()
+	function GetDataObat_post()
 	{
+		$Filter = $this->post('body');
 		# code...
 		$JumlahData=$this->ModelObat->JumlahData();
 		$this->load->library('pagination');
@@ -28,7 +29,7 @@ class Obat extends REST_Controller
 
 		$From=$this->uri->segment(3);
 		$this->pagination->initialize($Config);
-		$Obat=$this->ModelObat->GetObat($Config['per_page'],$From)->result();
+		$Obat=$this->ModelObat->GetObat($Config['per_page'],$From,$Filter)->result();
 		$this->response($Obat, 200);
 	}
 

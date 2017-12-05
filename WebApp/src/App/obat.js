@@ -20,14 +20,25 @@ export default {
         TanggalKadaluarsa:Date,
         KodeObat:String,
       },
+      FilterModel:{
+        IdObat: "",
+        NamaObat: "",
+        Golongan: "",
+        StokObat: "",
+        HargaSatuan:"",
+        TanggalKadaluarsa:"",
+        KodeObat:"",
+      },
     }
   },
   methods: {
     GetDataObat () {
-      axios.get('http://localhost/apotek/WebService/index.php/api/obat/GetDataObat')
-      .then(response => {
+      axios.post('http://localhost/apotek/WebService/index.php/api/obat/GetDataObat/',{
+        body: this.Filter()
+      }).then(response => {
         // JSON responses are automatically parsed.
         this.Obats = response.data;
+        //console.log(response);
       })
       .catch(e => {
         this.errors.push(e)
@@ -89,6 +100,35 @@ export default {
         KodeObat:null,
       },
       this.OpenModal ('ModalObatForm');
+    },
+    Filter(){
+      var FilterParam = {};
+      if(this.FilterModel.KodeObat !== "" && this.FilterModel.KodeObat !== null ){
+        FilterParam.KodeObat =this.FilterModel.KodeObat;
+      }
+      if(this.FilterModel.NamaObat !== null && this.FilterModel.NamaObat !== "" ){
+        FilterParam.NamaObat =this.FilterModel.NamaObat;
+      }
+      if(this.FilterModel.Golongan !== null && this.FilterModel.Golongan !== "" ){
+        FilterParam.Golongan = this.FilterModel.Golongan;
+      }
+      if(this.FilterModel.StokObat !== null && this.FilterModel.StokObat !== "" ){
+        FilterParam.StokObat = this.FilterModel.StokObat;
+      }
+      if(this.FilterModel.HargaSatuan !== null && this.FilterModel.HargaSatuan !== "" ){
+        FilterParam.HargaSatuan=this.FilterModel.HargaSatuan;
+      }
+      if(this.FilterModel.TanggalKadaluarsa !== null && this.FilterModel.TanggalKadaluarsa !== "" ){
+        FilterParam.TanggalKadaluarsa =this.FilterModel.TanggalKadaluarsa;
+      }
+      return FilterParam;
+    },
+    ChangeFilter(Param){
+      if(Param.length > 2){
+        this.GetDataObat();
+      }else if(Param.length == 0){
+          this.GetDataObat();
+      }
     },
     OpenModal (Modal){
       $('#'+Modal).modal('show');

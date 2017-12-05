@@ -19,6 +19,15 @@
 		</thead>
 
 		<tbody>
+      <tr>
+        <td></td>
+        <td><input v-on:keyup="ChangeFilter(FilterModel.KodeObat)" class="form-control" name="KodeObat" v-model="FilterModel.KodeObat" type="text" maxlength="30"></td>
+        <td><input v-on:keyup="ChangeFilter(FilterModel.NamaObat)" class="form-control" name="NamaObat" v-model="FilterModel.NamaObat" type="text" maxlength="30"></td>
+        <td><input v-on:keyup="ChangeFilter(FilterModel.Golongan)" class="form-control" name="Golongan" v-model="FilterModel.Golongan" type="text" maxlength="30"></td>
+        <td><input v-on:keyup="ChangeFilter(FilterModel.StokObat)" class="form-control" name="StokObat" v-model="FilterModel.StokObat" type="text" maxlength="30"></td>
+        <td><input v-on:keyup="ChangeFilter(FilterModel.HargaSatuan)" class="form-control" name="HargaSatuan" v-model="FilterModel.HargaSatuan" type="text" maxlength="30"></td>
+        <td><input v-on:change="ChangeFilter(FilterModel.TanggalKadaluarsa)" class="form-control" name="TanggalKadaluarsa" v-model="FilterModel.TanggalKadaluarsa" type="date" maxlength="30"></td>
+      </tr>
 			<tr v-for="(obats,index) in Obats">
         <td>{{index + 1}}</td>
         <td>{{obats.KodeObat}}</td>

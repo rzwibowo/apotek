@@ -102,7 +102,7 @@
     </div>
 </div>
 </template>
-<script src="../App/Pembelian.js"></script>
+<script src="../App/PembelianForm.js"></script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   td.jml{

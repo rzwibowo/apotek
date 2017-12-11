@@ -1,3 +1,4 @@
+<script src="../App/Pembelian.js"></script>
 <template>
   <div class="PembelianController">
     <div class="page-head text-center">
@@ -102,7 +103,7 @@
     </div>
 </div>
 </template>
-<script src="../App/Pembelian.js"></script>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   td.jml{

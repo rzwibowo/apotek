@@ -33,6 +33,13 @@ class Obat extends REST_Controller
 		$this->response($Obat, 200);
 	}
 
+	function GetDataObat_get()
+	{
+		# code...
+		$Obat=$this->ModelObat->GetObatAll()->result();
+		$this->response($Obat, 200);
+	}
+
 	function SaveDataObat_post()
 	{
 		# code...

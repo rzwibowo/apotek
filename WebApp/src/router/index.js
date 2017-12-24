@@ -6,6 +6,7 @@ import Golongan from '@/components/Golongan'
 import Supplier from '@/components/Supplier'
 import Pembelian from '@/components/Pembelian'
 import PembelianForm from '@/components/PembelianForm'
+import PembelianView from '@/components/PembelianView'
 
 Vue.use(Router)
 
@@ -33,13 +34,23 @@ export default new Router({
     },
     {
       path: '/Pembelian',
-      name: 'pembelian',
+      name: 'PembelianFormController',
       component: Pembelian
     },
     {
       path: '/PembelianForm',
-      name: 'pembelianForm',
+      name: 'PembelianFormController',
       component: PembelianForm
+    },
+    {
+      path: '/PembelianForm/:IdPembelian',
+      name: 'UpdatePembelian',
+      component: PembelianForm
+    },
+    {
+      path: '/PembelianView/:IdPembelian',
+      name: 'ViewPembelian',
+      component: PembelianView
     }
   ]
 })

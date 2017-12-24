@@ -24,6 +24,14 @@ class ModelObat extends CI_Model
 		$this->db->limit($Angka,$Batas);
 	return $this->db->get();
 }
+function GetObatAll()
+{
+	# code...
+	$this->db->select('*');
+	$this->db->from('Obat');
+	$this->db->join('Golongan', 'Golongan.IdGolongan = Obat.IdGolongan');
+return $this->db->get();
+}
 
 function Data($Angka,$Batas)
 {

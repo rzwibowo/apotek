@@ -2,14 +2,11 @@
 <template>
   <div class="PembelianController">
     <div class="page-head text-center">
-      <h1>Daftar Pembelian</h1>
+      <h1>Pembelian</h1>
     </div>
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalFormLabel">Form Data Pembelian</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body">
         <form>
@@ -96,18 +93,15 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" v-on:click="CloseModal('ModalPembelianForm')" class="btn btn-secondary">Tutup</button>
         <button type="button" v-on:click="SaveDataPembelian" class="btn btn-primary">Simpan</button>
+        <button type="button" v-on:click="GoPage('/Pembelian/')" class="btn btn-secondary">Kembali</button>
         <!--v-on:click="CloseModal" -->
       </div>
     </div>
 </div>
 </template>
-<<<<<<< HEAD
 
-=======
 <script src="../App/PembelianForm.js"></script>
->>>>>>> 60591fe019409c83be0bd9b29162e5d40eb13eec
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   td.jml{

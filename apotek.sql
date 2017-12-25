@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04 Des 2017 pada 04.06
+-- Generation Time: 25 Des 2017 pada 14.08
 -- Versi Server: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -132,7 +132,20 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`IdPembelian`, `TanggalPembelian`, `IdSupplier`, `TotalHargaBeli`, `TotalJumlahObat`, `StatusPembelian`) VALUES
-(117, '2017-12-08', '3', 306292, 10, 0);
+(117, '2017-12-15', '1', 404292, 9, 0),
+(118, '2017-12-15', '1', 260000, 3, 0),
+(119, '2017-12-15', '1', 260000, 3, 0),
+(120, '2017-12-16', '1', 120000, 12, 0),
+(121, '2017-12-23', '2', 110000, 9, 0),
+(122, '2017-12-21', '2', 2090000, 70, 0),
+(123, '2017-12-28', '2', 14735540, 35, 0),
+(124, '2017-12-28', '2', 14735540, 35, 0),
+(125, '2017-12-21', '1', 2444440, 8, 0),
+(126, '2017-12-21', '1', 2444440, 8, 0),
+(127, '2017-12-21', '1', 400000, 1, 0),
+(128, '2017-12-15', '', 18000, 3, 0),
+(129, '2017-12-22', '2', 30, 6, 0),
+(130, '2017-12-22', '2', 15000, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -155,7 +168,22 @@ CREATE TABLE `pembeliandetail` (
 
 INSERT INTO `pembeliandetail` (`IdDetailPembelian`, `IdPembelian`, `IdObat`, `JumlahObat`, `HargaPembelian`, `Status`) VALUES
 (6, 117, 39, 4, 32323, 0),
-(7, 117, 42, 3, 55000, 0);
+(7, 117, 42, 4, 55000, 0),
+(8, 118, 39, 1, 200000, 0),
+(9, 118, 42, 2, 30000, 0),
+(10, 119, 39, 1, 200000, 0),
+(11, 119, 42, 2, 30000, 0),
+(12, 120, 39, 12, 10000, 0),
+(13, 120, 42, 4, 20000, 0),
+(16, 122, 42, 30, 3000, 0),
+(17, 122, 43, 40, 50000, 0),
+(18, 0, 40, 2, 3333, 0),
+(19, 0, 42, 4, 55666, 0),
+(22, 121, 42, 4, 20000, 0),
+(24, 121, 43, 5, 6000, 0),
+(25, 0, 40, 2, 3, 0),
+(26, 0, 40, 4, 6, 0),
+(27, 130, 40, 3, 5000, 0);
 
 -- --------------------------------------------------------
 
@@ -164,26 +192,42 @@ INSERT INTO `pembeliandetail` (`IdDetailPembelian`, `IdPembelian`, `IdObat`, `Ju
 --
 
 CREATE TABLE `penjualan` (
-  `no_jual` int(11) NOT NULL,
-  `tgl_jual` date NOT NULL,
-  `id_pegawai` char(4) NOT NULL,
-  `total_harga_jual` int(11) NOT NULL,
-  `total_jml_obat` int(11) NOT NULL
+  `IdPenjualan` int(11) NOT NULL,
+  `TanggalJual` date NOT NULL,
+  `IdPegawai` int(11) NOT NULL,
+  `TotalHargaJual` int(11) NOT NULL,
+  `TotalJumlahObat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `penjualan`
+--
+
+INSERT INTO `penjualan` (`IdPenjualan`, `TanggalJual`, `IdPegawai`, `TotalHargaJual`, `TotalJumlahObat`) VALUES
+(8, '0000-00-00', 0, 1000, 3),
+(9, '0000-00-00', 0, 1000, 3),
+(10, '0000-00-00', 0, 1000, 3);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penjualan_detail`
+-- Struktur dari tabel `penjualandetail`
 --
 
-CREATE TABLE `penjualan_detail` (
-  `no_detail_jual` int(11) NOT NULL,
-  `no_jual` int(11) NOT NULL,
-  `kd_obat` int(11) NOT NULL,
-  `jml_obat` int(11) NOT NULL,
-  `harga_satuan` int(11) NOT NULL
+CREATE TABLE `penjualandetail` (
+  `IdDetailJual` int(11) NOT NULL,
+  `IdPenjualan` int(11) NOT NULL,
+  `IdObat` int(11) NOT NULL,
+  `JumlahObat` int(11) NOT NULL,
+  `HargaSatuan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `penjualandetail`
+--
+
+INSERT INTO `penjualandetail` (`IdDetailJual`, `IdPenjualan`, `IdObat`, `JumlahObat`, `HargaSatuan`) VALUES
+(1, 10, 39, 3, 2323);
 
 -- --------------------------------------------------------
 
@@ -284,13 +328,13 @@ ALTER TABLE `pembeliandetail`
 -- Indexes for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  ADD PRIMARY KEY (`no_jual`);
+  ADD PRIMARY KEY (`IdPenjualan`);
 
 --
--- Indexes for table `penjualan_detail`
+-- Indexes for table `penjualandetail`
 --
-ALTER TABLE `penjualan_detail`
-  ADD PRIMARY KEY (`no_detail_jual`);
+ALTER TABLE `penjualandetail`
+  ADD PRIMARY KEY (`IdDetailJual`);
 
 --
 -- Indexes for table `persediaan`
@@ -333,22 +377,22 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `IdPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `IdPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 --
 -- AUTO_INCREMENT for table `pembeliandetail`
 --
 ALTER TABLE `pembeliandetail`
-  MODIFY `IdDetailPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `IdDetailPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `no_jual` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdPenjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT for table `penjualan_detail`
+-- AUTO_INCREMENT for table `penjualandetail`
 --
-ALTER TABLE `penjualan_detail`
-  MODIFY `no_detail_jual` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `penjualandetail`
+  MODIFY `IdDetailJual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `persediaan`
 --

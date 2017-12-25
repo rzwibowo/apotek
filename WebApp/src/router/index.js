@@ -7,6 +7,7 @@ import Supplier from '@/components/Supplier'
 import Pembelian from '@/components/Pembelian'
 import PembelianForm from '@/components/PembelianForm'
 import PembelianView from '@/components/PembelianView'
+import PenjualanForm from '@/components/PenjualanForm'
 
 Vue.use(Router)
 
@@ -51,6 +52,11 @@ export default new Router({
       path: '/PembelianView/:IdPembelian',
       name: 'ViewPembelian',
       component: PembelianView
+    },
+    {
+      path: '/PenjualanForm/',
+      name: 'PenjualanForm',
+      component: PenjualanForm
     }
   ]
 })

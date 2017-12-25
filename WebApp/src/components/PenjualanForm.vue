@@ -1,0 +1,210 @@
+<template>
+  <div class="PembelianController">
+    <div class="page-head text-center">
+      <h1>Penjualan</h1>
+    </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalFormLabel">Form Penjualan</h5>
+        <b style="text-align:right">Tanggal : 02/10/2017</b>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3">Obat</label>
+              <div class="col-sm-3">
+                <button class="btn btn-primary"  v-on:click="OpenModal('ModalSearchObat')"> <i class="fa fa-info" aria-hidden="true"></i></button>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3">Kode Obat</label>
+              <div class="col-sm-6">
+                <input class="form-control" name="KodeObat" v-model="PenjualanDetailOther.KodeObat" type="text" >
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3">Nama Obat</label>
+              <div class="col-sm-6">
+                <input class="form-control" name="NamaObat" v-model="PenjualanDetailOther.NamaObat" type="text" >
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3">Harga Obat</label>
+              <div class="col-sm-6">
+                <input class="form-control" name="HargaSatuan" v-model="PenjualanDetailOther.HargaSatuan" type="text" >
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6" >
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3"></label>
+              <div class="col-sm-3">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3">Jumlah Obat</label>
+              <div class="col-sm-3">
+                <input class="form-control" name="JumlahObat" v-model="PenjualanDetailOther.JumlahObat" type="text" >
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3">Diskon</label>
+              <div class="col-sm-6">
+                <div class="input-group">
+                <input class="form-control" name="Diskon" v-model="PenjualanDetailOther.Diskon" type="text" >
+                  <span class="input-group-addon">%</span>
+              </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-sm-3">Total</label>
+              <div class="col-sm-6">
+                <input class="form-control" name="Total" v-model="PenjualanDetailOther.Total" type="text" >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <button type="button" v-on:click="AddItem()" class="btn btn-primary">Tambah</button>
+          <button type="button" v-on:click="CancelAddItem()" class="btn btn-default">Batal</button>
+        </div>
+        <div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Kode Obat</th>
+                  <th>Nama Obat</th>
+                  <th>Jumlah Obat</th>
+                  <th>Harga Obat</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(Item,index) in Penjualan.DetailPenjualan">
+                  <td>{{index + 1}}</td>
+                  <td>
+                    <input class="form-control" name="KodeObat" v-model="Item.KodeObat" type="text" maxlength="30" disabled="true">
+                  </td>
+                  <td>
+                    <input class="form-control" name="NamaObat" v-model="Item.NamaObat" type="text" maxlength="30" disabled="true">
+                  </td>
+                  <td>
+                    <input class="form-control" name="JumlahObat" v-model="Item.JumlahObat" type="text" maxlength="30" >
+                  </td>
+                  <td>
+                    <input class="form-control" name="HargaSatuan" v-model="Item.HargaSatuan" type="text" maxlength="30" disabled="true">
+                  </td>
+                  <td>
+                    <input class="form-control" name="Total" v-model="Item.Total" type="text" maxlength="30" disabled="true">
+                  </td>
+                  <td class="text-center">
+                    <a  v-on:click="DeleteItem(index)" class="btn btn-outline-danger"> <i class="fa fa-close" aria-hidden="true"></i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>Item :  100</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>Total :  100</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" v-on:click="SaveDataPenjualan" class="btn btn-primary">Simpan</button>
+        <button type="button" v-on:click="GoPage('/Pembelian/')" class="btn btn-secondary">Kembali</button>
+        <!--v-on:click="CloseModal" -->
+      </div>
+    </div>
+    <!--modal Search Obat -->
+    <div class="modal fade" id="ModalSearchObat" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true" style="margin:auto;">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 600px;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalFormLabel">Search Obat</h5>
+          </div>
+          <div class="modal-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th></th>
+                  <th>Kode Obat</th>
+                  <th>Nama Obat</th>
+                  <th>Jenis Obat</th>
+                  <th>Kadaluarsa</th>
+                  <th>Harga Satuan</th>
+                  <th>Stok</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(Item,index) in Obats">
+                  <td>{{index + 1}}</td>
+                  <td><label><input type="radio" name="optradio[Item.IdObat]" v-on:click="SelectedItemObat(Item.IdObat)"></label></td>
+                  <td>{{Item.KodeObat}} </td>
+                  <td>{{Item.NamaObat}}</td>
+                  <td>{{Item.Golongan}}</td>
+                  <td>{{Item.TanggalKadaluarsa}}</td>
+                  <td>{{Item.HargaSatuan}}</td>
+                  <td>{{Item.StokObat}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" v-on:click="SelectedObat()" class="btn btn-primary">Pilih</button>
+            <button type="button" v-on:click="CloseModal('ModalSearchObat')" class="btn btn-secondary">Tutup</button>
+            <!--v-on:click="CloseModal" -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script src="../App/PenjualanForm.js"></script>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+td.jml{
+  text-align: right;
+}
+/*h1, h2 {
+font-weight: normal;
+}
+ul {
+list-style-type: none;
+padding: 0;
+}
+li {
+display: inline-block;
+margin: 0 10px;
+}
+a {
+color: #42b983;
+}*/
+
+body .modal {
+  /* new custom width */
+  width: 100%;
+  /* must be half of the width, minus scrollbar on the left (30px) */
+  margin-left: 0px;
+}
+</style>

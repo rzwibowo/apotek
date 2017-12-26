@@ -105,7 +105,7 @@ function GenerateKodeObat($IdGolongan){
 	$KodeObat ="";
 	$IdObatLast = $this->LastRecord()->result();
 	$IdObat = $IdObatLast[0]->IdObat + 1;
-	$KodeGolongan = $this->ModelGolongan->GatById(array('IdGolongan'=>$IdGolongan))->result();
+	$KodeGolongan = $this->ModelGolongan->GatById(array('IdGolongan'=>$IdGolongan),'Golongan')->result();
 	$KodeGolongan = $KodeGolongan[0]->KodeGolongan;
 
 	if($IdObat < 10){

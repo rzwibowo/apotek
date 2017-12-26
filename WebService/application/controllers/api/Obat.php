@@ -14,6 +14,7 @@ class Obat extends REST_Controller
 		parent::__construct($config);
 		$this->load->model('ModelObat');
 		$this->load->model('ModelGolongan');
+	  $this->load->library('zend');
 	}
 
 	function GetDataObat_post()
@@ -45,9 +46,15 @@ class Obat extends REST_Controller
 		# code...
 		$Obat =  (object) $this->post('body');
 		//Insert Data
+		$this->zend->load('Zend/Barcode');
 		if($Obat->IdObat == NULL){
 			$Obat->KodeObat = $this->ModelObat->GenerateKodeObat($Obat->IdGolongan);
 			if($this->ModelObat->InsertObat($Obat,'Obat')){
+				$Kode = $Obat->KodeObat;
+				$File = Zend_Barcode::draw('code128', 'image', array('text' => $Kode), array());
+      	$Kode = time().$Kode;
+      	$StoreImage = imagepng($File,"ImageBarcode/{$Kode}.png");
+				var_dump($StoreImage);
 				$this->response(array('status' => 'sukses'), 200);
 			}else{
 				$this->response(array('error' => 'Entity could not be created'), 404);

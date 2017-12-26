@@ -55,6 +55,7 @@ export default {
         // if(this.$route.params.IdPembelian !== undefined){
         //   window.history.back();
         // }else {
+        alert("Transaksi Berhasil Disimpan");
         this.InitializeForm();
         //  }
       })

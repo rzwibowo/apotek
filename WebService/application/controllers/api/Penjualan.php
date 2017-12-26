@@ -32,7 +32,7 @@ class Penjualan extends REST_Controller
 		$DetailPenjualanModel =$Penjualan->DetailPenjualan;
 		if($Penjualan->IdPenjualan == null){
 			$PenjualanModel->IdPenjualan = $Penjualan->IdPenjualan;
-			$PenjualanModel->TanggalJual = getdate();
+			$PenjualanModel->TanggalJual = date("Y-m-d");
 			$PenjualanModel->IdPegawai = 0;
 			$PenjualanModel->TotalHargaJual = $Penjualan->TotalHargaJual;
 			$PenjualanModel->TotalJumlahObat = $Penjualan->TotalJumlahObat;

@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalFormLabel">Form Penjualan</h5>
-        <b style="text-align:right">Tanggal : 02/10/2017</b>
+        <b style="text-align:right">Tanggal : {{CurrentDate | formatDate}}</b>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -26,13 +26,13 @@
             <div class="form-group row">
               <label class="col-form-label col-sm-3">Nama Obat</label>
               <div class="col-sm-6">
-                <input class="form-control" name="NamaObat" v-model="PenjualanDetailOther.NamaObat" type="text" >
+                <input class="form-control" name="NamaObat" v-model="PenjualanDetailOther.NamaObat" type="text" disabled="true">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-form-label col-sm-3">Harga Obat</label>
               <div class="col-sm-6">
-                <input class="form-control" name="HargaSatuan" v-model="PenjualanDetailOther.HargaSatuan" type="text" >
+                <input class="form-control" name="HargaSatuan" v-model="PenjualanDetailOther.HargaSatuan" type="text" disabled="true" >
               </div>
             </div>
           </div>
@@ -45,14 +45,14 @@
             <div class="form-group row">
               <label class="col-form-label col-sm-3">Jumlah Obat</label>
               <div class="col-sm-3">
-                <input class="form-control" name="JumlahObat" v-model="PenjualanDetailOther.JumlahObat" type="text" >
+                <input class="form-control" name="JumlahObat" v-model="PenjualanDetailOther.JumlahObat" type="text" v-on:keyup="CalculateTotalDetailOther">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-form-label col-sm-3">Diskon</label>
               <div class="col-sm-6">
                 <div class="input-group">
-                <input class="form-control" name="Diskon" v-model="PenjualanDetailOther.Diskon" type="text" >
+                <input class="form-control" name="Diskon" v-model="PenjualanDetailOther.Diskon" type="text" disabled="true">
                   <span class="input-group-addon">%</span>
               </div>
               </div>
@@ -60,7 +60,7 @@
             <div class="form-group row">
               <label class="col-form-label col-sm-3">Total</label>
               <div class="col-sm-6">
-                <input class="form-control" name="Total" v-model="PenjualanDetailOther.Total" type="text" >
+                <input class="form-control" name="Total" v-model="PenjualanDetailOther.Total" type="text" disabled="true">
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td>Item :  100</td>
+                  <td><b>Item :</b> {{TotalItemObat}}</td>
                   <td></td>
                 </tr>
                 <tr>
@@ -120,7 +120,7 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td>Total :  100</td>
+                  <td><b>Total :</b>Rp.{{TotalBayar}}</td>
                   <td></td>
                 </tr>
               </tbody>

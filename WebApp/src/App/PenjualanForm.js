@@ -10,6 +10,9 @@ export default {
     return {
       errors: [],
       Obats: [],
+      CurrentDate:Date,
+      TotalBayar:Number,
+      TotalItemObat:Number,
       IdObatSelected:Number,
       Penjualan: {
         IdPenjualan:Number,
@@ -42,18 +45,18 @@ export default {
   methods: {
     SaveDataPenjualan(){
       this.PopuletDataDetail(true);
-  //   console.log(this.Penjualan);
+      //   console.log(this.Penjualan);
       axios.post('http://localhost/apotek/webService/index.php/api/Penjualan/SaveDataPenjualan', {
         body: this.Penjualan
       })
       .then(response => {
-         console.log(response);
-      //   alert("Transaksi Berhasil");
-       // if(this.$route.params.IdPembelian !== undefined){
-       //   window.history.back();
-       // }else {
-         this.InitializeForm();
-      //  }
+        console.log(response);
+        //   alert("Transaksi Berhasil");
+        // if(this.$route.params.IdPembelian !== undefined){
+        //   window.history.back();
+        // }else {
+        this.InitializeForm();
+        //  }
       })
       .catch(e => {
         this.errors.push(e);
@@ -80,37 +83,41 @@ export default {
       // if(this.$route.params.IdPembelian !== undefined){
       //   this.EditPembelian(this.$route.params.IdPembelian);
       // }else{
-        this.Penjualan= {
-          IdPenjualan:null,
-          TanggalJual:null,
-          IdPegawai:null,
-          TotalHargaJual:1000,
-          TotalJumlahObat:3,
-          DetailPenjualan:[]
-        }
-        this.PenjualanDetail={
-          IdDetailJual:null,
-          IdPenjualan:null,
-          IdObat:null,
-          JumlahObat:null,
-          HargaSatuan:null
-        }
-        this.PenjualanDetailOther={
-          IdDetailJual:null,
-          IdPenjualan:null,
-          IdObat:null,
-          JumlahObat:null,
-          HargaSatuan:null,
-          KodeObat:null,
-          NamaObat:null,
-          Diskon:null,
-          Total:null,
-        }
-    //  }
+       this.CurrentDate = new Date();
+      this.TotalItemObat =0;
+      this.TotalBayar =0;
+      this.Penjualan= {
+        IdPenjualan:null,
+        TanggalJual:null,
+        IdPegawai:null,
+        TotalHargaJual:1000,
+        TotalJumlahObat:3,
+        DetailPenjualan:[]
+      }
+      this.PenjualanDetail={
+        IdDetailJual:null,
+        IdPenjualan:null,
+        IdObat:null,
+        JumlahObat:null,
+        HargaSatuan:null
+      }
+      this.PenjualanDetailOther={
+        IdDetailJual:null,
+        IdPenjualan:null,
+        IdObat:null,
+        JumlahObat:null,
+        HargaSatuan:null,
+        KodeObat:null,
+        NamaObat:null,
+        Diskon:null,
+        Total:null,
+      }
+      //  }
     },
     AddItem(){
       this.Penjualan.DetailPenjualan.push(this.PenjualanDetailOther);
       this.PenjualanDetailOther={};
+      this.CalculateTotalHargaAndObat();
     },
     CancelAddItem(){
       this.PenjualanDetailOther={};
@@ -164,26 +171,24 @@ export default {
       //     DetailPembelianTemp.push(ItemDetail);
       //   });
       // }
-       this.Penjualan.DetailPenjualan = DetailPenjualanTemp;
+      this.Penjualan.DetailPenjualan = DetailPenjualanTemp;
     },
     CalculateTotalHargaAndObat(){
-      var TotalHargaBeli=0;
-      var TotalObat=0;
-      this.Pembelian.DetailPembelian.forEach(function(Item, Index) {
-        if(Item.IsEdit == 0){
-          TotalObat += Number(Item.JumlahObat);
-          TotalHargaBeli+= Number(Item.HargaPembelian) * Item.JumlahObat;
-        }
+      var TotalBayar=0;
+      var TotalItem=0;
+      this.Penjualan.DetailPenjualan.forEach(function(Item, Index) {
+        TotalItem += Number(Item.JumlahObat);
+        TotalBayar+= Number(Item.HargaSatuan) * Item.JumlahObat;
       });
-      this.Pembelian.TotalHargaBeli =TotalHargaBeli;
-      this.Pembelian.TotalJumlahObat =TotalObat;
+      this.TotalBayar =TotalBayar;
+      this.TotalItemObat =TotalItem;
     },
     EditItem(Index){
       this.Pembelian.DetailPembelian[Index].IsEdit=1;
     },
     DeleteItem(Index){
       this.Penjualan.DetailPenjualan.splice(Index,1);
-      //this.CalculateTotalHargaAndObat();
+      this.CalculateTotalHargaAndObat();
     },
     SelectedItemObat(IdObat){
       this.IdObatSelected = IdObat;
@@ -201,7 +206,12 @@ export default {
         Diskon:0,
         Total:0,
       }
-     this.CloseModal('ModalSearchObat');
+      this.CloseModal('ModalSearchObat');
+    },
+    CalculateTotalDetailOther(){
+      if(this.PenjualanDetailOther.IdObat !== undefined && this.PenjualanDetailOther.IdObat !== null){
+        this.PenjualanDetailOther.Total= this.PenjualanDetailOther.JumlahObat == null ? 0: this.PenjualanDetailOther.JumlahObat * this.PenjualanDetailOther.HargaSatuan;
+      }
     },
     GoPage(path){
       this.$router.push(path);

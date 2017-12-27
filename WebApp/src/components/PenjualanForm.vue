@@ -9,12 +9,12 @@
         <b style="text-align:right">Tanggal : {{CurrentDate | formatDate}}</b>
       </div>
       <div class="modal-body">
-        <div class="row">
+        <div class="row" v-show="ShowSearchObat">
           <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-form-label col-sm-3">Obat</label>
               <div class="col-sm-3">
-                <button class="btn btn-primary"  v-on:click="OpenModal('ModalSearchObat')"> <i class="fa fa-info" aria-hidden="true"></i></button>
+                <button class="btn btn-primary"  v-on:click="SearchObat"> <i class="fa fa-info" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="form-group row">
@@ -52,9 +52,9 @@
               <label class="col-form-label col-sm-3">Diskon</label>
               <div class="col-sm-6">
                 <div class="input-group">
-                <input class="form-control" name="Diskon" v-model="PenjualanDetailOther.Diskon" type="text" disabled="true">
+                  <input class="form-control" name="Diskon" v-model="PenjualanDetailOther.Diskon" type="text" disabled="true">
                   <span class="input-group-addon">%</span>
-              </div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
@@ -64,11 +64,16 @@
               </div>
             </div>
           </div>
+          <div class="col-sm-12" style="text-align:right;">
+            <button type="button" v-on:click="AddItem()" class="btn btn-primary fa fa-plus"></button>
+            <button type="button" v-on:click="CancelAddItem()" class="btn btn-default fa fa-minus"></button>
+          </div>
         </div>
-        <div style="text-align:right">
-          <button type="button" v-on:click="AddItem()" class="btn btn-primary">Tambah</button>
-          <button type="button" v-on:click="CancelAddItem()" class="btn btn-default">Batal</button>
+        <div style="text-align:left">
+          <button type="button" v-on:click="OpenSearchObat(ShowSearchObat)" v-show="!ShowSearchObat" class="btn btn-primary">Cari Obat</button>
+          <button type="button" v-on:click="OpenSearchObat(ShowSearchObat)"  v-show="ShowSearchObat" class="btn btn-primary">Tutup</button>
         </div>
+        <br>
         <div>
           <div class="table-responsive">
             <table class="table table-hover">
@@ -93,7 +98,7 @@
                     <input class="form-control" name="NamaObat" v-model="Item.NamaObat" type="text" maxlength="30" disabled="true">
                   </td>
                   <td>
-                    <input class="form-control" name="JumlahObat" v-model="Item.JumlahObat" type="text" maxlength="30" >
+                    <input class="form-control" name="JumlahObat" v-model="Item.JumlahObat" v-on:keyup="CalculateTotalHargaAndObat" type="text" maxlength="30" >
                   </td>
                   <td>
                     <input class="form-control" name="HargaSatuan" v-model="Item.HargaSatuan" type="text" maxlength="30" disabled="true">
@@ -137,7 +142,7 @@
     <!--modal Search Obat -->
     <div class="modal fade" id="ModalSearchObat" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true" style="margin:auto;">
       <div class="modal-dialog" role="document">
-        <div class="modal-content" style="width: 600px;">
+        <div class="modal-content" style="width: 800px;">
           <div class="modal-header">
             <h5 class="modal-title" id="modalFormLabel">Search Obat</h5>
           </div>
@@ -156,9 +161,19 @@
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td> <input class="form-control" name="KodeObat" v-model="FilterObatModel.KodeObat" v-on:keyup="ChangeFilterObat(FilterObatModel.KodeObat)"  type="text" maxlength="30" ></td>
+                  <td> <input class="form-control" name="NamaObat" v-model="FilterObatModel.NamaObat" v-on:keyup="ChangeFilterObat(FilterObatModel.NamaObat)"  type="text" maxlength="30" ></td>
+                  <td> <input class="form-control" name="Golongan" v-model="FilterObatModel.Golongan" v-on:keyup="ChangeFilterObat(FilterObatModel.Golongan)" type="text" maxlength="30" ></td>
+                  <td> <input class="form-control" name="TanggalKadaluarsa" v-model="FilterObatModel.TanggalKadaluarsa" v-on:change="ChangeFilterObat(FilterObatModel.TanggalKadaluarsa)" type="date" maxlength="30" ></td>
+                  <td> <input class="form-control" name="HargaSatuan" v-model="FilterObatModel.HargaSatuan" v-on:keyup="ChangeFilterObat(FilterObatModel.HargaSatuan)" type="text" maxlength="30" ></td>
+                  <td> <input class="form-control" name="StokObat" v-model="FilterObatModel.StokObat" v-on:keyup="ChangeFilterObat(FilterObatModel.StokObat)"  type="text" maxlength="30" ></td>
+                </tr>
                 <tr v-for="(Item,index) in Obats">
                   <td>{{index + 1}}</td>
-                  <td><label><input type="radio" name="optradio[Item.IdObat]" v-on:click="SelectedItemObat(Item.IdObat)"></label></td>
+                  <td><label><input type="radio" v-model="ListIdObat[Item.IdObat]" v-on:click="SelectedItemObat(Item.IdObat)" ></label></td>
                   <td>{{Item.KodeObat}} </td>
                   <td>{{Item.NamaObat}}</td>
                   <td>{{Item.Golongan}}</td>

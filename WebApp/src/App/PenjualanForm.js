@@ -10,6 +10,8 @@ export default {
     return {
       errors: [],
       Obats: [],
+      ListIdObat:[],
+      ShowSearchObat:Boolean,
       CurrentDate:Date,
       TotalBayar:Number,
       TotalItemObat:Number,
@@ -40,12 +42,25 @@ export default {
         Diskon:Number,
         Total:Number,
       },
+      FilterObatModel:{
+        IdObat: "",
+        NamaObat: "",
+        Golongan: "",
+        StokObat: "",
+        HargaSatuan:"",
+        TanggalKadaluarsa:"",
+        KodeObat:"",
+      },
     }
   },
   methods: {
     SaveDataPenjualan(){
+      if(this.Penjualan.DetailPenjualan.length == 0 || this.Penjualan.DetailPenjualan.length == undefined || this.Penjualan.DetailPenjualan.length == null){
+       alert("Belum ada data yang akan di simpan");
+     }else if(this.PenjualanDetailOther.IdObat !== undefined){
+       alert("Ada data yang belum di tambahkan");
+     }else{
       this.PopuletDataDetail(true);
-      //   console.log(this.Penjualan);
       axios.post('http://localhost/apotek/webService/index.php/api/Penjualan/SaveDataPenjualan', {
         body: this.Penjualan
       })
@@ -62,6 +77,7 @@ export default {
       .catch(e => {
         this.errors.push(e);
       })
+      }
     },
     EditPembelian(IdPembelian){
       this.Pembelian= { };
@@ -84,7 +100,8 @@ export default {
       // if(this.$route.params.IdPembelian !== undefined){
       //   this.EditPembelian(this.$route.params.IdPembelian);
       // }else{
-       this.CurrentDate = new Date();
+      this.ShowSearchObat= false;
+      this.CurrentDate = new Date();
       this.TotalItemObat =0;
       this.TotalBayar =0;
       this.Penjualan= {
@@ -116,16 +133,30 @@ export default {
       //  }
     },
     AddItem(){
+      if(this.PenjualanDetailOther.IdObat == null){
+        alert("Obat Belum Di Pilih");
+      }else if(this.PenjualanDetailOther.JumlahObat == null){
+        alert("Jumlah Obat Belum Di input");
+      }else{
+    var IsExis =   this.Penjualan.DetailPenjualan.filter(x => x.IdObat == this.PenjualanDetailOther.IdObat)[0];
+    var IndexIsExis = null;
+    if(IsExis == undefined ){
       this.Penjualan.DetailPenjualan.push(this.PenjualanDetailOther);
+    }else{
+    IndexIsExis = this.Penjualan.DetailPenjualan.indexOf(IsExis);
+    this.Penjualan.DetailPenjualan[IndexIsExis].JumlahObat = parseInt(this.Penjualan.DetailPenjualan[IndexIsExis].JumlahObat) + parseInt(this.PenjualanDetailOther.JumlahObat);
+    }
       this.PenjualanDetailOther={};
       this.CalculateTotalHargaAndObat();
+      }
     },
     CancelAddItem(){
       this.PenjualanDetailOther={};
     },
     GetDataObat(){
-      axios.get('http://localhost/apotek/WebService/index.php/api/obat/GetDataObat')
-      .then(response => {
+      axios.post('http://localhost/apotek/WebService/index.php/api/obat/GetDataObat/',{
+          body: this.FilterObat()
+      }).then(response => {
         this.Obats = response.data;
       })
       .catch(e => {
@@ -192,27 +223,70 @@ export default {
       this.CalculateTotalHargaAndObat();
     },
     SelectedItemObat(IdObat){
+
       this.IdObatSelected = IdObat;
+    },
+    SearchObat(){
+      this.ListIdObat = [];
+      this.OpenModal('ModalSearchObat');
     },
     SelectedObat(){
       var Obat = this.Obats.filter(x => x.IdObat == this.IdObatSelected)[0];
-      this.PenjualanDetailOther={
-        IdDetailJual:Obat.IdDetailJual,
-        IdPenjualan:null,
-        IdObat:Obat.IdObat,
-        JumlahObat:null,
-        HargaSatuan:Obat.HargaSatuan,
-        KodeObat:Obat.KodeObat,
-        NamaObat:Obat.NamaObat,
-        Diskon:0,
-        Total:0,
+      if(Obat !== undefined){
+        this.PenjualanDetailOther={
+          IdDetailJual:Obat.IdDetailJual,
+          IdPenjualan:null,
+          IdObat:Obat.IdObat,
+          JumlahObat:null,
+          HargaSatuan:Obat.HargaSatuan,
+          KodeObat:Obat.KodeObat,
+          NamaObat:Obat.NamaObat,
+          Diskon:0,
+          Total:0,
+        }
+        this.CloseModal('ModalSearchObat');
+      }else {
+        alert("Anda belum memilih obat");
       }
-      this.CloseModal('ModalSearchObat');
+
     },
     CalculateTotalDetailOther(){
       if(this.PenjualanDetailOther.IdObat !== undefined && this.PenjualanDetailOther.IdObat !== null){
         this.PenjualanDetailOther.Total= this.PenjualanDetailOther.JumlahObat == null ? 0: this.PenjualanDetailOther.JumlahObat * this.PenjualanDetailOther.HargaSatuan;
       }
+    },
+    FilterObat(){
+      var FilterParam = {};
+      if(this.FilterObatModel.KodeObat !== "" && this.FilterObatModel.KodeObat !== null ){
+        FilterParam.KodeObat =this.FilterObatModel.KodeObat;
+      }
+      if(this.FilterObatModel.NamaObat !== null && this.FilterObatModel.NamaObat !== "" ){
+        FilterParam.NamaObat =this.FilterObatModel.NamaObat;
+      }
+      if(this.FilterObatModel.Golongan !== null && this.FilterObatModel.Golongan !== "" ){
+        FilterParam.Golongan = this.FilterObatModel.Golongan;
+      }
+      if(this.FilterObatModel.StokObat !== null && this.FilterObatModel.StokObat !== "" ){
+        FilterParam.StokObat = this.FilterObatModel.StokObat;
+      }
+      if(this.FilterObatModel.HargaSatuan !== null && this.FilterObatModel.HargaSatuan !== "" ){
+        FilterParam.HargaSatuan=this.FilterObatModel.HargaSatuan;
+      }
+      if(this.FilterObatModel.TanggalKadaluarsa !== null && this.FilterObatModel.TanggalKadaluarsa !== "" ){
+        FilterParam.TanggalKadaluarsa =this.FilterObatModel.TanggalKadaluarsa;
+      }
+      return FilterParam;
+    },
+    ChangeFilterObat(Param){
+        if(Param.length > 2){
+          this.GetDataObat();
+        }else if(Param.length == 0){
+            this.GetDataObat();
+        }
+    },
+    OpenSearchObat(IsOpen)
+    {
+       this.ShowSearchObat= IsOpen == true? false:true;
     },
     GoPage(path){
       this.$router.push(path);

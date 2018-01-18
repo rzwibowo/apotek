@@ -1,3 +1,4 @@
+
 <template>
   <div class="ObatController">
     <div class="page-head text-center">
@@ -64,13 +65,13 @@
       </div>
       <div class="modal-body">
         <form>
-          <div class="form-group row" v-show="Obat.KodeObat !==null">
+          <div class="form-group row required" v-show="Obat.KodeObat !==null">
               <label class="col-form-label col-sm-3">Kode Obat</label>
               <div class="col-sm-6">
                   <input class="form-control" name="kode_obat" v-model="Obat.KodeObat" type="text" disabled="true" maxlength="30">
               </div>
           </div>
-            <div class="form-group row">
+            <div class="form-group row required">
                 <label class="col-form-label col-sm-3">Golongan Obat</label>
                 <div class="col-sm-6">
                     <select name="Golongan" v-model="Obat.IdGolongan" class="form-control">
@@ -80,21 +81,21 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
                 <label class="col-form-label col-sm-3">Nama Obat</label>
                 <div class="col-sm-6">
                     <input class="form-control" name="NamaObat" v-model="Obat.NamaObat" type="text" placeholder="Ketik Nama Obat" maxlength="30">
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
                 <label class="col-form-label col-sm-3">Stok Obat</label>
                 <div class="col-sm-3">
                     <input class="form-control" name="stok_obat" v-model="Obat.StokObat" type="number" placeholder="Ketik Stok Obat" max="9999999999">
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
                 <label class="col-form-label col-sm-3">Harga Satuan</label>
                 <div class="col-sm-4">
                     <div class="input-group">
@@ -104,7 +105,7 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row required">
                 <label class="col-form-label col-sm-3">Tanggal Kadaluarsa</label>
                 <div class="col-sm-4">
                     <input class="form-control" name="TanggalKadaluarsa" v-model="Obat.TanggalKadaluarsa" type="date" placeholder="Ketik Tanggal kadaluarsa">

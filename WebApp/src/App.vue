@@ -26,7 +26,7 @@ export default {
     }
   },
   mounted () {
-    this.$parent.$on('toggleNav', () => {
+    this.$parent.$on('toggleNav', (Active) => {
       console.log('resyivd')
       this.active = !this.active
     })

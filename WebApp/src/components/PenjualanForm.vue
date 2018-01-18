@@ -9,7 +9,7 @@
         <b style="text-align:right">Tanggal : {{CurrentDate | formatDate}}</b>
       </div>
       <div class="modal-body">
-        <div class="row" v-show="ShowSearchObat">
+        <!-- <div class="row" v-show="ShowSearchObat">
           <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-form-label col-sm-3">Obat</label>
@@ -68,11 +68,11 @@
             <button type="button" v-on:click="AddItem()" class="btn btn-primary fa fa-plus"></button>
             <button type="button" v-on:click="CancelAddItem()" class="btn btn-default fa fa-minus"></button>
           </div>
-        </div>
-        <div style="text-align:left">
+        </div> -->
+       <!--  <div style="text-align:left">
           <button type="button" v-on:click="OpenSearchObat(ShowSearchObat)" v-show="!ShowSearchObat" class="btn btn-primary">Cari Obat</button>
           <button type="button" v-on:click="OpenSearchObat(ShowSearchObat)"  v-show="ShowSearchObat" class="btn btn-primary">Tutup</button>
-        </div>
+        </div> -->
         <br>
         <div>
           <div class="table-responsive">
@@ -92,7 +92,7 @@
                 <tr v-for="(Item,index) in Penjualan.DetailPenjualan">
                   <td>{{index + 1}}</td>
                   <td>
-                    <input class="form-control" name="KodeObat" v-model="Item.KodeObat" type="text" maxlength="30" disabled="true">
+                    <input class="form-control" name="KodeObat" v-model="Item.KodeObat" type="text" maxlength="30">
                   </td>
                   <td>
                     <input class="form-control" name="NamaObat" v-model="Item.NamaObat" type="text" maxlength="30" disabled="true">
@@ -134,7 +134,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" v-on:click="SaveDataPenjualan" class="btn btn-primary">Simpan</button>
+        <button type="button" v-on:click="SaveDataPenjualan" class="btn btn-success">Simpan</button>
         <button type="button" v-on:click="GoPage('/Pembelian/')" class="btn btn-secondary">Kembali</button>
         <!--v-on:click="CloseModal" -->
       </div>

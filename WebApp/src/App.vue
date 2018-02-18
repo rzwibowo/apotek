@@ -1,39 +1,32 @@
 <template>
   <div id="app">
-  <!--<img src="./assets/logo.png">-->
-    <div id="sidebar">
-        <router-link to="/obat" >Obat</router-link>
-        <router-link to="/golongan" >Golongan</router-link>
-        <router-link to="/supplier" >Supplier</router-link>
-        <router-link to="/pembelian" >Pembelian</router-link>
-    </div>
-    <!-- nyonto sidebar di -->
-    <!-- https://codepen.io/thiagokpelo/pen/OgWKvy/?editors=0010 -->
-    <!-- belum berhasil -->
     <div id="content">
-      <button @click="toggleNav()">tugel</button>
       <router-view/>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'app',
-  data () {
+  created(){
+    this.GoAutorization();
+  },
+    data () {
     return {
-      active: true
     }
   },
-  mounted () {
-    this.$parent.$on('toggleNav', (Active) => {
-      console.log('resyivd')
-      this.active = !this.active
-    })
-  },
   methods: {
-    toggleNav () {
-      this.$parent.$emit('toggleNav')
+    GoAutorization(){
+      if(this.GetCokies() !== "" && this.GetCokies() !== null){
+          this.$router.push("/");
+      }else{
+          this.$router.push("/Aut");
+      }
+    },
+    GetCokies(){
+      return this.$cookies.get("tokenUserApp")
     }
   }
 }

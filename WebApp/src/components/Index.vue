@@ -1,41 +1,73 @@
 <template>
-  <div class="hello">
-    <h1></h1>
-    <h2>Apotik</h2>
-    <!-- <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul> -->
+  <div id="app">
+  <!--<img src="./assets/logo.png">-->
+    <div id="sidebar">
+        <router-link to="/obat" >Obat</router-link>
+        <router-link to="/golongan" >Golongan</router-link>
+        <router-link to="/supplier" >Supplier</router-link>
+        <router-link to="/pembelian" >Pembelian</router-link>
+        <router-link to="/priode" >Priode</router-link>
+    </div>
+    <!-- nyonto sidebar di -->
+    <!-- https://codepen.io/thiagokpelo/pen/OgWKvy/?editors=0010 -->
+    <!-- belum berhasil -->
+    <div id="content">
+      <button @click="toggleNav()">tugel</button>
+      <router-view/>
+    </div>
   </div>
 </template>
+
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'app',
   data () {
     return {
-     
+      active: true
+    }
+  },
+  mounted () {
+    this.$parent.$on('toggleNav', (Active) => {
+      console.log('resyivd')
+      this.active = !this.active
+    })
+  },
+  methods: {
+    toggleNav () {
+      this.$parent.$emit('toggleNav')
     }
   }
 }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+#app {
+  display: flex;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* text-align: center; */
+  color: #32383f;
+  margin-top: 60px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+#sidebar {
+  display: flex;
+  width: 20em;
+  background: #5c9feb;
+  height: 100vh;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+#sidebar.active{
+  display: block;
 }
-a {
-  color: #42b983;
+#sidebar a{
+  display: block;
+  padding: 10px 5px;
+  color: rgb(56, 56, 56);
+}
+#content{
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  width: 100vw;
 }
 </style>

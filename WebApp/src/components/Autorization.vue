@@ -99,7 +99,7 @@ export default {
       .then(response => {
          if(response.data.length > 0){
          this.$cookies.set("tokenUserApp",response.data.id_user,"7d");
-         this.$router.push("/");
+        this.$router.go('/')
          }
 
       })

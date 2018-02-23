@@ -33,8 +33,8 @@ export default {
   methods: {
     GoAutorization(){
       this.IsEnableNavbar = false;
-      if(this.GetCokies() !== "" && this.GetCokies() !== null){
-          this.$router.push("/");
+      if(this.GetCokies() !== "" && this.GetCokies() !== null && this.GetCokies() !== "undefined"){
+          this.$router.push("/Index");
           this.IsEnableNavbar = true;
       }else{
         this.IsEnableNavbar = false;

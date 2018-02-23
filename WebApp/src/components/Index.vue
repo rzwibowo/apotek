@@ -5,8 +5,14 @@
 </template>
 
 <script>
+import Aut from '../App/Aut.js'
+import axios from 'axios'
 export default {
   name: 'app',
+  created(){
+   //this.GetCokies();
+  },
+  mixins: [Aut],
   data () {
     return {
       active: true

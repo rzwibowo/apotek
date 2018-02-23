@@ -98,8 +98,8 @@ export default {
       })
       .then(response => {
          if(response.data.length > 0){
-         this.$cookies.set("tokenUserApp",response.data.id_user,"7d");
-        this.$router.go('/')
+          this.$cookies.set("tokenUserApp",response.data[0].id_user,"7d");
+          this.$router.go('/Index')
          }
 
       })
@@ -108,15 +108,16 @@ export default {
       })
     },
     Initialization(){
-      if(this.GetCokies() !== "" && this.GetCokies() !== null){
-          this.$router.push("/");
+      console.log(this.GetCokies());
+      if(this.GetCokies() !== "" && this.GetCokies() !== null && this.GetCokies() !== "undefined"){
+         this.$router.push("/Index");
       }else{
         this.User = {
             IdUser:Number,
             Username:null,
             Password:null
           }
-      }
+     }
     }
   }
 }

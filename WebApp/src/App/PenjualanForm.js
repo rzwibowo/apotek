@@ -130,6 +130,7 @@ export default {
         Diskon:null,
         Total:null,
       }
+    this.AddItemObat();
       //  }
     },
     AddItem(){
@@ -149,6 +150,9 @@ export default {
       this.PenjualanDetailOther={};
       this.CalculateTotalHargaAndObat();
       }
+    },
+    AddItemObat(){
+      this.Penjualan.DetailPenjualan.push(this.PenjualanDetailOther);
     },
     CancelAddItem(){
       this.PenjualanDetailOther={};

@@ -1,5 +1,5 @@
 <?php
-class Md_Login extends CI_Model
+class ModelLogin extends CI_Model
 {
   public function __construct() {
      parent::__construct();
@@ -7,11 +7,16 @@ class Md_Login extends CI_Model
      //load database library
      $this->load->database();
  }
-    function login_check($table,$where)
-    {
-        # code...
-        return $this->db->get_where($table,$where);
-    }
+ function AutUser($Username,$Password)
+ {
+         # code...
+         $PasswordHash = md5($Password);
+         $this->db->select('*');
+         $this->db->from('user');
+         $this->db->where('username', $Username);
+         $this->db->where('password', $PasswordHash);
+   return $this->db->get();
+ }
 
     // function get_level($table,$where)
     // {

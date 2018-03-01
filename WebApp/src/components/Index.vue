@@ -1,39 +1,32 @@
 <template>
   <div id="app">
-  <!--<img src="./assets/logo.png">-->
-    <div id="sidebar">
-        <router-link to="/obat" >Obat</router-link>
-        <router-link to="/golongan" >Golongan</router-link>
-        <router-link to="/supplier" >Supplier</router-link>
-        <router-link to="/pembelian" >Pembelian</router-link>
-    </div>
-    <!-- nyonto sidebar di -->
-    <!-- https://codepen.io/thiagokpelo/pen/OgWKvy/?editors=0010 -->
-    <!-- belum berhasil -->
-    <div id="content">
-      <button @click="toggleNav()">tugel</button>
-      <router-view/>
-    </div>
+
   </div>
 </template>
 
 <script>
+import Aut from '../App/Aut.js'
+import axios from 'axios'
 export default {
   name: 'app',
+  created(){
+   //this.GetCokies();
+  },
+  mixins: [Aut],
   data () {
     return {
       active: true
     }
   },
   mounted () {
-    this.$on('toggleNav', () => {
+    this.$parent.$on('toggleNav', (Active) => {
       console.log('resyivd')
       this.active = !this.active
     })
   },
   methods: {
     toggleNav () {
-      this.$emit('toggleNav')
+      this.$parent.$emit('toggleNav')
     }
   }
 }
@@ -50,13 +43,13 @@ export default {
   margin-top: 60px;
 }
 #sidebar {
-  display: none;
+  display: flex;
   width: 20em;
   background: #5c9feb;
   height: 100vh;
 }
 #sidebar.active{
-  display: flex;
+  display: block;
 }
 #sidebar a{
   display: block;

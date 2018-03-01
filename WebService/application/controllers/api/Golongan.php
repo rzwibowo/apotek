@@ -50,5 +50,10 @@ class Golongan extends REST_Controller
 		$Golongan=$this->ModelGolongan->GatById($where,'Golongan')->result();
 		$this->response($Golongan[0], 200);
 	}
+	function AutoComplite_get($nama){
+		$where=array('Golongan'=>$nama);
+		$Golongan=$this->ModelGolongan->GetLike($where)->result();
+		$this->response($Golongan[0], 200);
+	}
 }
 ?>

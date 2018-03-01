@@ -1,65 +1,27 @@
 <?php
-class Login extends CI_Controller
-{
-    function __construct()
-    {
-        # code...
-        parent::__construct();
-        $this->load->model('md_login');
-    }
+defined('BASEPATH')	or exit('ga boleh ada direct script');
+require APPPATH . '/libraries/REST_Controller.php';
+use Restserver\Libraries\REST_Controller;
+class Login extends REST_Controller {
 
-    function index()
-    {
-        # code...
-        $this->load->view('vw_login');
-    }
+  function __construct($config = 'rest')
+	{
+		# code...
+		parent::__construct($config);
+  //  if($this->session->userdata('status') != "login"){
+		//	redirect(base_url("login"));
+		//}
+    $this->load->model('ModelLogin');
+	}
 
-    function login_action()
-    {
-        # code...
-        $username=$this->input->post('username');
-        $password=$this->input->post('password');
-        $where=array(
-            'username' => $username ,
-            'password' => md5($password) 
-        );
-
-        $check=$this->md_login->login_check("user",$where)->num_rows();
-        if($check>0){
-            // $level=$this->md_login->get_level("user",$where);
-            $data_session = array(
-                'nama' => $username ,
-                // 'level' => $level ,
-                'status' => 'login'
-            );
-
-            $this->session->set_userdata($data_session);
-            
-            redirect(base_url("user"));
-        } else {
-            echo "Username or Password invalid";
-        }
-    }
-
-    // function ambil_data_level()
-    // {
-    //     # code...
-    //     $username=$this->input->post('username');
-    //     $password=$this->input->post('password');
-    //     $where=array(
-    //         'username' => $username ,
-    //         'password' => md5($password) 
-    //     );
-    //     echo $level=$this->md_login->get_level("user",$where);
-    // }
-
-    function logout()
-    {
-        # code...
-        $this->session->sess_destroy();
-        redirect(base_url('login'));
-    }
+	// function index(){
+	// 	$this->load->view('vw_user');
+	// }
+  function UserAutorization_post()
+	{
+		# code...
+    $UserPost = $this->post('body');
+		$User=$this->ModelLogin->AutUser($UserPost['Username'],$UserPost['Password'])->result();
+		$this->response($User, 200);
+	}
 }
-
-
-?>

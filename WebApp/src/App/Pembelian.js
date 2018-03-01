@@ -1,12 +1,16 @@
 
 import axios from 'axios'
+import Aut from '../App/Aut.js'
 
 export default {
   name: 'PembelianController',
   created(){
-    console.log(this.$route.name);
-    this.GetDataPembelian();
+   console.log(this.GetCokies());
+    if(this.GetCokies() == true){
+       this.GetDataPembelian();
+    }
   },
+  mixins: [Aut],
   data () {
     return {
       Pembelians: [],

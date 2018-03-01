@@ -54,5 +54,11 @@ class ModelGolongan extends CI_Model
 		# code...
 		return $this->db->get_where('Golongan',$Where);
 	}
+	function GetLike($param){
+		$this->db->select('*');
+		$this->db->from('Golongan');
+	    $this->db->like($param);
+	return $this->db->get();
+	}
 }
 ?>

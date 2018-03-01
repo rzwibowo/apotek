@@ -13,21 +13,31 @@
             <th>Tanggal Mulai</th>
             <th>Tanggal Selesai</th>
             <th>Status</th>
-            <th>Tanggal Dibuat</th>
-            <th>Tanggal Diubah</th>
             <th></th>
           </tr>
         </thead>
 
         <tbody>
+        <tr>
+          <td></td>
+          <td><input v-on:keyup="ChangeFilter(FilterModel.NamaPriode)" class="form-control" name="NamaPriode" v-model="FilterModel.NamaPriode" type="text" maxlength="30"></a>
+          <td><input v-on:keyup="ChangeFilter(FilterModel.TanggalMulai)" class="form-control" name="TanggalMulai" v-model="FilterModel.TanggalMulai" type="text" maxlength="30"></td>
+          <td><input v-on:keyup="ChangeFilter(FilterModel.TanggalAkhir)" class="form-control" name="TanggalAkhir" v-model="FilterModel.TanggalAkhir" type="text" maxlength="30"></td>
+          <td>
+            <select name="Status" v-model="FilterModel.Status" class="form-control" v-on:change="ChangeFilter(FilterModel.Status)">
+              <option value=''>Pilih</option>
+              <option value="1">Aktif</option>
+              <option value="0">Non Aktif</option>
+            </select>
+          </td>
+          <td></td>
+        </tr>
           <tr v-for="(Priodes,index) in Priodes">
             <td>{{index + 1}}</td>
-            <td>Nama Priode</a>
-            <td>Tanggal Muali</td>
-            <td>Tanggal Selesai</td>
-            <td>Status</td>
-            <td>Tanggal Dibuat</td>
-            <td>Tanggal Selesai</td>
+            <td>{{Priodes.NamaPriode}}</a>
+            <td>{{Priodes.TanggalMulai}}</td>
+            <td>{{Priodes.TanggalAkhir}}</td>
+            <td>{{Priodes.Status == 1? "Aktif":"Non Aktif"}}</td>
             <td class="text-center">
               <a  v-on:click="EditPriode(Priodes.IdPriode)"  class="btn btn-outline-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
               <a  v-on:click="ViewPriode(Priodes.IdPriode)" class="btn btn-outline-info"> <i class="fa fa-info" aria-hidden="true"></i></a>
@@ -50,27 +60,33 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalFormLabel">Edit Priode {{Priode.NamaPriode}}</h5>
+            <h5 class="modal-title" id="modalFormLabel">Form Priode</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <form>
-              <div class="form-group row">
+              <div class="form-group row required">
                 <label class="col-form-label col-sm-5 text-right">Nama Priode</label>
                 <div class="col-sm-6">
-                  <input class="form-control" name="NamaPriode" v-model="Priode.NamaPriode" type="text" placeholder="Ketik Nama Priode" maxlength="30">
+                  <input class="form-control" name="NamaPriode" v-model="Priode.NamaPriode" type="text" maxlength="30">
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-form-label col-sm-5 text-right">Nomor Telepon</label>
+              <div class="form-group row required">
+                <label class="col-form-label col-sm-5 text-right">Tanggal Mulai</label>
                 <div class="col-sm-6">
-                  <input class="form-control" name="NomerTelepon" v-model="Priode.NomorTelepon" type="text" placeholder="Ketik NomorTelepon" maxlength="30">
+                  <input class="form-control" name="TanggalMulai" v-model="Priode.TanggalMulai" type="date"  maxlength="30">
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-form-label col-sm-5 text-right">Tanggal Akhir</label>
+                <div class="col-sm-6">
+                  <input class="form-control" name="TanggalAkhir" v-model="Priode.TanggalAkhir" type="date" maxlength="30">
                 </div>
               </div>
 
-              <div class="form-group row">
+              <div class="form-group row required">
                 <label class="col-form-label col-sm-5 text-right">Status</label>
                 <div class="col-sm-6">
                   <div class="form-check form-check-inline">
@@ -83,13 +99,6 @@
                       <input class="form-check-input" type="radio" name="Status" v-model="Priode.Status" value="0" > Non Aktif
                     </label>
                   </div>
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-form-label col-sm-5  text-right">Alamat</label>
-                <div class="col-sm-6">
-                  <textarea class="form-control" rows="5" id="Alamat" v-model="Priode.Alamat" ></textarea>
                 </div>
               </div>
             </form>

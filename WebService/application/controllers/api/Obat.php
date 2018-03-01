@@ -13,7 +13,7 @@ class Obat extends REST_Controller
 		# code...
 		parent::__construct($config);
 		$this->load->model('ModelObat');
-		$this->load->model('ModelGolongan');
+		$this->load->model('ModelKategori');
 	  $this->load->library('zend');
 	}
 
@@ -47,20 +47,24 @@ class Obat extends REST_Controller
 		$Obat =  (object) $this->post('body');
 		//Insert Data
 		$this->zend->load('Zend/Barcode');
+		$Date = date("Y-m-d H:i:s");
 		if($Obat->IdObat == NULL){
-			$Obat->KodeObat = $this->ModelObat->GenerateKodeObat($Obat->IdGolongan);
+			$Obat->KodeObat = $this->ModelObat->GenerateKodeObat($Obat->IdKategori);
+			$Obat->TanggalDiBuat = $Date;
+			$Obat->TanggalDiUbah = $Date;
 			if($this->ModelObat->InsertObat($Obat,'Obat')){
 				$Kode = $Obat->KodeObat;
 				$File = Zend_Barcode::draw('code128', 'image', array('text' => $Kode), array());
       	$Kode = time().$Kode;
       	$StoreImage = imagepng($File,"ImageBarcode/{$Kode}.png");
-				var_dump($StoreImage);
+				//var_dump($StoreImage);
 				$this->response(array('status' => 'sukses'), 200);
 			}else{
 				$this->response(array('error' => 'Entity could not be created'), 404);
 			}
 			//Update Data
 		}else {
+			$Obat->TanggalDiUbah = $Date;
 			$Where=array(
 				'IdObat'=>$Obat->IdObat
 			);

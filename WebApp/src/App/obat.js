@@ -1,29 +1,38 @@
 
 import axios from 'axios'
+import Aut from '../App/Aut.js'
 
 export default {
   name: 'ObatController',
   created(){
-    this.GetDataObat();
+    this.GetDataObat()
   },
+  mixins: [Aut],
   data () {
     return {
       Obats: [],
       errors: [],
-      GolonganObats:[],
+      KategoriObats:[],
+      Satuan:[],
       Obat: {
         IdObat: Number,
-        IdGolongan: Number,
+        IdKategori: Number,
+        IdSatuan:Number,
         NamaObat: String,
         StokObat: Number,
         HargaSatuan:Number,
         TanggalKadaluarsa:Date,
         KodeObat:String,
+        DiBuatOlah:Number,
+        DiUbahOleh:Number,
+        TanggalDiBuat:Date,
+        TanggalDiUbah:Date,
       },
       FilterModel:{
         IdObat: "",
         NamaObat: "",
-        Golongan: "",
+        NamaKategori: "",
+        NamaSatuan:"",
         StokObat: "",
         HargaSatuan:"",
         TanggalKadaluarsa:"",
@@ -45,6 +54,7 @@ export default {
       })
     },
     SaveDataObat(){
+      this.Obat.DiUbahOleh = this.GetIdUser()
       axios.post('http://localhost/apotek/webService/index.php/api/obat/SaveDataObat', {
         body: this.Obat
       })
@@ -57,23 +67,34 @@ export default {
         this.errors.push(e)
       })
     },
-    GetDataGolonganObat () {
-      axios.get('http://localhost/apotek/webService/index.php/api/Golongan/GetGolonganAll')
+    GetDataKategoriObat () {
+      axios.get('http://localhost/apotek/webService/index.php/api/Kategori/GetKategoriAll')
       .then(response => {
         // JSON responses are automatically parsed.
-        this.GolonganObats = response.data;
+        this.KategoriObats = response.data;
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    },
+    GetDataSatuanObat () {
+      axios.get('http://localhost/apotek/webService/index.php/api/Satuan/GetSatuanAll')
+      .then(response => {
+        // JSON responses are automatically parsed.
+        this.Satuan = response.data;
       })
       .catch(e => {
         this.errors.push(e)
       })
     },
     EditObat(IdObat){
-      this.GetDataGolonganObat();
+      this.GetDataKategoriObat();
+      this.GetDataSatuanObat()
       this.GetDataById(IdObat,true);
       this.OpenModal('ModalObatForm');
     },
     ViewObat(IdObat){
-      this.GetDataGolonganObat();
+      this.GetDataKategoriObat();
       this.GetDataById(IdObat,false);
       this.OpenModal('ModalObatView');
     },
@@ -89,15 +110,21 @@ export default {
       })
     },
     AddObat(){
-      this.GetDataGolonganObat();
+      this.GetDataKategoriObat();
+      this.GetDataSatuanObat();
       this.Obat= {
         IdObat: null,
-        IdGolongan: "",
+        IdKategori: "",
+        IdSatuan:"",
         NamaObat: null,
         StokObat: null,
         HargaSatuan:null,
         TanggalKadaluarsa:null,
         KodeObat:null,
+        DiBuatOlah:this.GetIdUser(),
+        DiUbahOleh:this.GetIdUser(),
+        TanggalDiBuat:Date,
+        TanggalDiUbah:Date,
       },
       this.OpenModal ('ModalObatForm');
     },
@@ -109,8 +136,11 @@ export default {
       if(this.FilterModel.NamaObat !== null && this.FilterModel.NamaObat !== "" ){
         FilterParam.NamaObat =this.FilterModel.NamaObat;
       }
-      if(this.FilterModel.Golongan !== null && this.FilterModel.Golongan !== "" ){
-        FilterParam.Golongan = this.FilterModel.Golongan;
+      if(this.FilterModel.NamaKategori !== null && this.FilterModel.NamaKategori !== "" ){
+        FilterParam.NamaKategori = this.FilterModel.NamaKategori;
+      }
+      if(this.FilterModel.NamaSatuan !== null && this.FilterModel.NamaSatuan !== "" ){
+        FilterParam.NamaSatuan = this.FilterModel.NamaSatuan;
       }
       if(this.FilterModel.StokObat !== null && this.FilterModel.StokObat !== "" ){
         FilterParam.StokObat = this.FilterModel.StokObat;

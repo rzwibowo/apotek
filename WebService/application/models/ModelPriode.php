@@ -2,7 +2,7 @@
 	/**
 	*
 	*/
-	class MdSupplier extends CI_Model
+	class ModelPriode extends CI_Model
 	{
 		public function __construct() {
 			 parent::__construct();
@@ -10,25 +10,25 @@
 			 //load database library
 			 $this->load->database();
 	 }
-		function GetSupplier()
+		function GetPriode()
 		{
             # code...
             $this->db->select('*');
-            $this->db->from('supplier');
+            $this->db->from('Priode');
 			return $this->db->get();
 		}
-		function GetSupplierWithFilter($Filter)
+		function GetPriodeWithFilter($Filter)
 		{
 						# code...
 						$this->db->select('*');
-						$this->db->from('supplier');
+						$this->db->from('Priode');
 						if(count($Filter) > 0){
 							$this->db->like($Filter);
 						}
 			 return $this->db->get();
 		}
 
-		function InsertSupplier($Data,$Table)
+		function InsertPriode($Data,$Table)
 		{
 			# code...
 			if($this->db->insert($Table,$Data)){
@@ -40,22 +40,22 @@
 
 		}
 
-		function DeleteSupplier($where,$table)
+		function DeletePriode($where,$table)
 		{
 			# code...
 			$this->db->where($where);
 			$this->db->delete($table);
 		}
 
-		function EditSupplier($where,$table)
+		function EditPriode($where,$table)
 		{
 			# code...
 			return $this->db->get_where($table,$where);
 		}
 		function GetById($Where){
-			return $this->db->get_where("Supplier",$Where);
+			return $this->db->get_where("Priode",$Where);
 		}
-		function UpdateSupplier($Where,$Data,$Table)
+		function UpdatePriode($Where,$Data,$Table)
 		{
 			# code...
 			$this->db->where($Where);

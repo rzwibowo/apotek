@@ -16,7 +16,9 @@ export default {
       }else{
         this.$router.go('/Index');
       }
-
     },
+   GetIdUser(){
+     return this.$cookies.get("tokenUserApp");
+   }
   },
 }

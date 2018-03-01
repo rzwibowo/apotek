@@ -9,7 +9,9 @@
           <tr>
             <th>No.</th>
             <th>Nama Supplier</th>
+            <th>Email</th>
             <th>Nomor Telepon</th>
+            <th>Nomor Hp</th>
             <th>Status</th>
             <th style="width: 35em">Alamat</th>
             <th></th>
@@ -17,10 +19,22 @@
         </thead>
 
         <tbody>
+          <tr>
+            <td></td>
+            <td><input v-on:keyup="ChangeFilter(FilterModel.NamaSupplier)" class="form-control" name="NamaSupplier" v-model="FilterModel.NamaSupplier" type="text" maxlength="30"></td>
+            <td><input v-on:keyup="ChangeFilter(FilterModel.Email)" class="form-control" name="Email" v-model="FilterModel.Email" type="text" maxlength="30"></td>
+            <td><input v-on:keyup="ChangeFilter(FilterModel.NomorTelepon)" class="form-control" name="NomorTelepon" v-model="FilterModel.NomorTelepon" type="text" maxlength="30"></td>
+            <td><input v-on:keyup="ChangeFilter(FilterModel.NoHp)" class="form-control" name="NoHp" v-model="FilterModel.NoHp" type="text" maxlength="30"></td>
+            <td><input v-on:keyup="ChangeFilter(FilterModel.Status)" class="form-control" name="Status" v-model="FilterModel.Status" type="text" maxlength="30"></td>
+            <td><input v-on:keyup="ChangeFilter(FilterModel.Alamat)" class="form-control" name="Alamat" v-model="FilterModel.Alamat" type="text" maxlength="30"></td>
+            <td></td>
+          </tr>
           <tr v-for="(suppliers,index) in Suppliers">
             <td>{{index + 1}}</td>
             <td><a  v-on:click="ViewSupplier(suppliers.IdSupplier)" href="#" >{{suppliers.NamaSupplier}}</a>
+            <td>{{suppliers.Email}}</a>
             <td>{{suppliers.NomorTelepon}}</td>
+            <td>{{suppliers.NoHp}}</td>
             <td>{{suppliers.Status ==1? "Aktif":"Non Aktif" }}</td>
             <td>{{suppliers.Alamat}}</td>
             <td class="text-center">
@@ -52,20 +66,20 @@
           </div>
           <div class="modal-body">
             <form>
-              <div class="form-group row">
+              <div class="form-group row required">
                 <label class="col-form-label col-sm-5">Nama Supplier</label>
                 <div class="col-sm-6">
-                  <input class="form-control" name="NamaSupplier" v-model="Supplier.NamaSupplier" type="text" placeholder="Ketik Nama Supplier" maxlength="30">
+                  <input class="form-control" name="NamaSupplier" v-model="Supplier.NamaSupplier" type="text"  maxlength="30">
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row required">
                 <label class="col-form-label col-sm-5">Nomor Telepon</label>
                 <div class="col-sm-6">
-                  <input class="form-control" name="NomerTelepon" v-model="Supplier.NomorTelepon" type="text" placeholder="Ketik NomorTelepon" maxlength="30">
+                  <input class="form-control" name="NomerTelepon" v-model="Supplier.NomorTelepon" type="text" maxlength="30">
                 </div>
               </div>
 
-              <div class="form-group row">
+              <div class="form-group row required">
                 <label class="col-form-label col-sm-5">Status</label>
                 <div class="col-sm-6">
                   <div class="form-check form-check-inline">
@@ -80,11 +94,52 @@
                   </div>
                 </div>
               </div>
-
+              <div class="form-group row required">
+                <label class="col-form-label col-sm-5">Nomor Hp</label>
+                <div class="col-sm-6">
+                  <input class="form-control" name="NomorHp" v-model="Supplier.NoHp" type="text" maxlength="30">
+                </div>
+              </div>
               <div class="form-group row">
+                <label class="col-form-label col-sm-5">Contact Person</label>
+                <div class="col-sm-6">
+                  <input class="form-control" name="ContactPerson" v-model="Supplier.ContactPerson" type="text" maxlength="30">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Email</label>
+                <div class="col-sm-6">
+                  <input class="form-control" name="Email" v-model="Supplier.Email" type="text" maxlength="30">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Bank</label>
+                <div class="col-sm-6">
+                    <select name="IdBank" v-model="Supplier.IdBank" class="form-control">
+                      <option value=''>Pilih</option>
+                      <option v-for="option in Bank" :value="option.IdBank">{{option.NamaBank}}</option>
+                    </select>
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-form-label col-sm-5">Kota</label>
+                <div class="col-sm-6">
+                    <select name="IdKota" v-model="Supplier.IdKota" class="form-control">
+                      <option value=''>Pilih</option>
+                      <option v-for="option in Kota" :value="option.IdKota">{{option.NamaKota}}</option>
+                    </select>
+                </div>
+              </div>
+              <div class="form-group row required">
                 <label class="col-form-label col-sm-5">Alamat</label>
                 <div class="col-sm-6">
                   <textarea class="form-control" rows="5" id="Alamat" v-model="Supplier.Alamat" ></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Website</label>
+                <div class="col-sm-6">
+                  <input class="form-control" name="Website" v-model="Supplier.Website" type="text" maxlength="30">
                 </div>
               </div>
             </form>

@@ -12,7 +12,7 @@ class ModelLogin extends CI_Model
          # code...
          $PasswordHash = md5($Password);
          $this->db->select('*');
-         $this->db->from('user');
+         $this->db->from('karyawan');
          $this->db->where('username', $Username);
          $this->db->where('password', $PasswordHash);
    return $this->db->get();

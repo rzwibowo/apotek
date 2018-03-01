@@ -9,7 +9,7 @@ class ModelObat extends CI_Model
 
 		//load database library
 		$this->load->database();
-		$this->load->model('ModelGolongan');
+		$this->load->model('ModelKategori');
 	}
 
 	function GetObat($Angka,$Batas,$Filter)
@@ -17,7 +17,8 @@ class ModelObat extends CI_Model
 		# code...
 		$this->db->select('*');
 		$this->db->from('Obat');
-		$this->db->join('Golongan', 'Golongan.IdGolongan = Obat.IdGolongan');
+		$this->db->join('Kategori', 'Kategori.IdKategori = Obat.IdKategori');
+		$this->db->join('Satuan', 'Satuan.IdSatuan = Obat.IdSatuan');
 		if(count($Filter) > 0){
 			$this->db->like($Filter);
 		}
@@ -29,7 +30,7 @@ function GetObatAll()
 	# code...
 	$this->db->select('*');
 	$this->db->from('Obat');
-	$this->db->join('Golongan', 'Golongan.IdGolongan = Obat.IdGolongan');
+	$this->db->join('Kategori', 'Kategori.IdKategori = Obat.IdKategori');
 return $this->db->get();
 }
 
@@ -67,20 +68,29 @@ function GetObatById($Where,$Table,$IsEdit)
 	# code...
 	if($IsEdit == 'true'){
 	$this->db->select('IdObat,
-	                   Obat.IdGolongan,
+	                   Obat.IdKategori,
 										 NamaObat,
 										 StokObat,
 										 HargaSatuan,
 										 TanggalKadaluarsa,
-										 KodeObat');
+										 KodeObat,
+									   Obat.DiBuatOlah,
+										 Obat.DiUbahOleh,
+										 Obat.TanggalDiBuat,
+										 Obat.TanggalDiUbah,
+										 StokMinimal,
+										 StokMaximal,
+										 Obat.IdSatuan,
+										 Obat.keterangan'
+									 );
 	$this->db->from('Obat');
-	$this->db->join('Golongan', 'Golongan.IdGolongan = Obat.IdGolongan');
+	$this->db->join('Kategori', 'Kategori.IdKategori = Obat.IdKategori');
 	$this->db->where($Where);
 	return $this->db->get();
 }else {
 	$this->db->select('*');
 	$this->db->from('Obat');
-	$this->db->join('Golongan', 'Golongan.IdGolongan = Obat.IdGolongan');
+	$this->db->join('Kategori', 'Kategori.IdKategori = Obat.IdKategori');
 	$this->db->where($Where);
 	return $this->db->get();
 }
@@ -99,25 +109,29 @@ function UpdateObat($Where,$Data,$Table)
 	}
 }
 
-function GenerateKodeObat($IdGolongan){
+function GenerateKodeObat($IdKategori){
 
 	//Create Kode Obat
 	$KodeObat ="";
 	$IdObatLast = $this->LastRecord()->result();
-	$IdObat = $IdObatLast[0]->IdObat + 1;
-	$KodeGolongan = $this->ModelGolongan->GatById(array('IdGolongan'=>$IdGolongan),'Golongan')->result();
-	$KodeGolongan = $KodeGolongan[0]->KodeGolongan;
+	if($IdObatLast == null){
+			$IdObat = 0 + 1;
+	}else{
+			$IdObat = $IdObatLast[0]->IdObat + 1;
+	}
+	$KodeKategori = $this->ModelKategori->GatById(array('IdKategori'=>$IdKategori),'Kategori')->result();
+	$KodeKategori = $KodeKategori[0]->KodeKategori;
 
 	if($IdObat < 10){
-		$KodeObat = $KodeGolongan."0000".$IdObat;
+		$KodeObat = $KodeKategori."0000".$IdObat;
 	}else if($IdObat > 9 && $IdObat < 100){
-		$KodeObat = $KodeGolongan."000".$IdObat;
+		$KodeObat = $KodeKategori."000".$IdObat;
 	}else if ($IdObat > 199 && $IdObat < 1000) {
-		$KodeObat = $KodeGolongan."00".$IdObat;
+		$KodeObat = $KodeKategori."00".$IdObat;
 	}else if ($IdObat > 1999 && $IdObat < 10000) {
-		$KodeObat = $KodeGolongan."0".$IdObat;
+		$KodeObat = $KodeKategori."0".$IdObat;
 	}else{
-		$KodeObat = $KodeGolongan."".$IdObat;
+		$KodeObat = $KodeKategori."".$IdObat;
 	}
 	return $KodeObat;
 }

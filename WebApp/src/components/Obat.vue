@@ -11,7 +11,8 @@
 				<th>No.</th>
 				<th>Kode Obat</th>
 				<th>Nama Obat</th>
-				<th>Golongan</th>
+				<th>Kategori</th>
+        <th>Satuan</th>
 				<th>Stok</th>
 				<th>Harga Satuan</th>
 				<th>Tanggal Kadaluarsa</th>
@@ -23,7 +24,8 @@
         <td></td>
         <td><input v-on:keyup="ChangeFilter(FilterModel.KodeObat)" class="form-control" name="KodeObat" v-model="FilterModel.KodeObat" type="text" maxlength="30"></td>
         <td><input v-on:keyup="ChangeFilter(FilterModel.NamaObat)" class="form-control" name="NamaObat" v-model="FilterModel.NamaObat" type="text" maxlength="30"></td>
-        <td><input v-on:keyup="ChangeFilter(FilterModel.Golongan)" class="form-control" name="Golongan" v-model="FilterModel.Golongan" type="text" maxlength="30"></td>
+        <td><input v-on:keyup="ChangeFilter(FilterModel.NamaKategori)" class="form-control" name="NamaKategori" v-model="FilterModel.NamaKategori" type="text" maxlength="30"></td>
+        <td><input v-on:keyup="ChangeFilter(FilterModel.NamaSatuan)" class="form-control" name="NamaSatuan" v-model="FilterModel.NamaSatuan" type="text" maxlength="30"></td>
         <td><input v-on:keyup="ChangeFilter(FilterModel.StokObat)" class="form-control" name="StokObat" v-model="FilterModel.StokObat" type="text" maxlength="30"></td>
         <td><input v-on:keyup="ChangeFilter(FilterModel.HargaSatuan)" class="form-control" name="HargaSatuan" v-model="FilterModel.HargaSatuan" type="text" maxlength="30"></td>
         <td><input v-on:change="ChangeFilter(FilterModel.TanggalKadaluarsa)" class="form-control" name="TanggalKadaluarsa" v-model="FilterModel.TanggalKadaluarsa" type="date" maxlength="30"></td>
@@ -32,7 +34,8 @@
         <td>{{index + 1}}</td>
         <td>{{obats.KodeObat}}</td>
         <td>{{obats.NamaObat}}</td>
-        <td>{{obats.Golongan}}</td>
+        <td>{{obats.NamaKategori}}</td>
+        <td>{{obats.NamaSatuan}}</td>
         <td>{{obats.StokObat}}</td>
         <td>{{obats.HargaSatuan}}</td>
         <td>{{obats.TanggalKadaluarsa  | formatDate }}</td>
@@ -72,11 +75,20 @@
               </div>
           </div>
             <div class="form-group row required">
-                <label class="col-form-label col-sm-3">Golongan Obat</label>
+                <label class="col-form-label col-sm-3">Kategori Obat</label>
                 <div class="col-sm-6">
-                    <select name="Golongan" v-model="Obat.IdGolongan" class="form-control">
+                    <select name="Kategori" v-model="Obat.IdKategori" class="form-control">
                       <option value=''>Pilih</option>
-                      <option v-for="option in GolonganObats" :value="option.IdGolongan">{{option.Golongan}}</option>
+                      <option v-for="option in KategoriObats" :value="option.IdKategori">{{option.NamaKategori}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row required">
+                <label class="col-form-label col-sm-3">Satuan Obat</label>
+                <div class="col-sm-6">
+                    <select name="Kategori" v-model="Obat.IdSatuan" class="form-control">
+                      <option value=''>Pilih</option>
+                      <option v-for="option in Satuan" :value="option.IdSatuan">{{option.NamaSatuan}}</option>
                     </select>
                 </div>
             </div>
@@ -84,14 +96,14 @@
             <div class="form-group row required">
                 <label class="col-form-label col-sm-3">Nama Obat</label>
                 <div class="col-sm-6">
-                    <input class="form-control" name="NamaObat" v-model="Obat.NamaObat" type="text" placeholder="Ketik Nama Obat" maxlength="30">
+                    <input class="form-control" name="NamaObat" v-model="Obat.NamaObat" type="text"  maxlength="30">
                 </div>
             </div>
 
-            <div class="form-group row required">
+            <div class="form-group row">
                 <label class="col-form-label col-sm-3">Stok Obat</label>
                 <div class="col-sm-3">
-                    <input class="form-control" name="stok_obat" v-model="Obat.StokObat" type="number" placeholder="Ketik Stok Obat" max="9999999999">
+                    <input class="form-control" name="stok_obat" v-model="Obat.StokObat" type="number"  max="9999999999">
                 </div>
             </div>
 
@@ -100,7 +112,7 @@
                 <div class="col-sm-4">
                     <div class="input-group">
                         <span class="input-group-addon">Rp</span>
-                        <input class="form-control" name="HargaSatuan" v-model="Obat.HargaSatuan" type="number" placeholder="Ketik Harga satuan" max="9999999999">
+                        <input class="form-control" name="HargaSatuan" v-model="Obat.HargaSatuan" type="number"  max="9999999999">
                     </div>
                 </div>
             </div>
@@ -108,7 +120,19 @@
             <div class="form-group row required">
                 <label class="col-form-label col-sm-3">Tanggal Kadaluarsa</label>
                 <div class="col-sm-4">
-                    <input class="form-control" name="TanggalKadaluarsa" v-model="Obat.TanggalKadaluarsa" type="date" placeholder="Ketik Tanggal kadaluarsa">
+                    <input class="form-control" name="TanggalKadaluarsa" v-model="Obat.TanggalKadaluarsa" type="date" >
+                </div>
+            </div>
+            <div class="form-group row required">
+                <label class="col-form-label col-sm-3">Stok Minimal</label>
+                <div class="col-sm-6">
+                    <input class="form-control" name="NamaObat" v-model="Obat.StokMinimal" type="text"  maxlength="30">
+                </div>
+            </div>
+            <div class="form-group row ">
+                <label class="col-form-label col-sm-3">Stok Maximal</label>
+                <div class="col-sm-6">
+                    <input class="form-control" name="NamaObat" v-model="Obat.StokMaximal" type="text"  maxlength="30">
                 </div>
             </div>
       </form>
@@ -148,9 +172,9 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-3">Golongan Obat</label>
+                <label class="col-form-label col-sm-3">Kategori Obat</label>
                 <div class="col-sm-4">
-                  <label class="col-form-label">{{Obat.Golongan}}</label>
+                  <label class="col-form-label">{{Obat.Kategori}}</label>
                 </div>
             </div>
 

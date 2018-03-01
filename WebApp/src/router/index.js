@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import Aut from '@/components/Autorization'
 import Index from '@/components/Index'
 import Obat from '@/components/Obat'
-import Golongan from '@/components/Golongan'
+import Kategori from '@/components/Kategori'
+import Kota from '@/components/Kota'
 import Supplier from '@/components/Supplier'
 import Pembelian from '@/components/Pembelian'
 import PembelianForm from '@/components/PembelianForm'
@@ -31,9 +32,9 @@ export default new Router({
       component: Obat
     },
     {
-      path: '/golongan',
-      name: 'Golongan',
-      component: Golongan
+      path: '/Kategori',
+      name: 'Kategori',
+      component: Kategori
     },
     {
       path: '/supplier',
@@ -69,6 +70,11 @@ export default new Router({
       path: '/Priode/',
       name: 'Priode',
       component: Priode
-    }
+    },
+    {
+      path: '/Kota',
+      name: 'Kota',
+      component: Kota
+    },
   ]
 })

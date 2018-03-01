@@ -1,37 +1,25 @@
 <template>
   <div id="app">
-    <!-- <div id="sidebar"  v-show="IsEnableNavbar">
-      <ul>
-        <router-link to="/obat" >Obat</router-link>
-        <router-link to="/golongan" >Golongan</router-link>
-        <router-link to="/supplier" >Supplier</router-link>
-        <router-link to="/pembelian" >Pembelian</router-link>
-        <router-link to="/priode" >Priode</router-link>
-      </ul>
-    </div> -->
-    <!-- nyonto sidebar di -->
-    <!-- https://codepen.io/thiagokpelo/pen/OgWKvy/?editors=0010 -->
-    <!-- belum berhasil -->
-    <!-- <div id="content">
-      <button @click="toggleNav()" v-show="IsEnableNavbar">tugel</button>
-      <router-view/>
-    </div> -->
-    <div id="sidebar"  v-bind:class="{ active: isActive }" v-show="IsEnableNavbar">
-      <div class="toggle-btn" v-on:click="toggleSidebar">
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="container-fluid">
+      <div class="row">
+        <div  id="sidebar" v-bind:class="{ 'col-md-2': isActive, 'col-md-1': !isActive }" v-show="IsEnableNavbar">
+          <div class="toggle-btn" v-on:click="toggleSidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="list" v-show="isActive">
+          <div class="item"><router-link to="/obat" >Obat</router-link></div>
+          <div class="item"><router-link to="/Kategori" >Kategori</router-link></div>
+          <div class="item"><router-link to="/supplier" >Supplier</router-link></div>
+          <div class="item"><router-link to="/pembelian" >Pembelian</router-link></div>
+          <div class="item"><router-link to="/priode" >Priode</router-link></div>
+          </div>
+        </div>
+        <div id="content" v-bind:class="{ 'col-md-10': isActive, 'col-md-11': !isActive }" >
+          <router-view/>
+        </div>
       </div>
-      <div class="list">
-      <div class="item"><router-link to="/obat" >Obat</router-link></div>
-      <div class="item"><router-link to="/golongan" >Golongan</router-link></div>
-      <div class="item"><router-link to="/supplier" >Supplier</router-link></div>
-      <div class="item"><router-link to="/pembelian" >Pembelian</router-link></div>
-      <div class="item"><router-link to="/priode" >Priode</router-link></div>
-      </div>
-    </div>
-    <div id="content">
-      <router-view/>
     </div>
   </div>
 </template>
@@ -74,23 +62,25 @@ export default {
 
 <style scoped>
 #app {
-  display: flex;
+  /* display: flex; */
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
   color: #32383f;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
  #sidebar {
-  display: flex;
-  width: 17em;
+  /* display: flex; */
+  /* width: 17em; */
   background: #5c9feb;
-  height: 100vh;
-  position:absolute;
-  transition:all 300ms linear;
-  top:0px;
-  left:-200px;
+  background: with;
+  /* height: 100vh; */
+  /* position:absolute; */
+   transition:all 300ms linear;
+  /* top:0px; */
+  /* left:-200px; */
+  position: relative;
 }
 #sidebar.active{
   /* display: block; */
@@ -101,16 +91,19 @@ export default {
   padding: 10px 5px;
   color: rgb(56, 56, 56);
 }
+div .container-fluid .row #sidebar {
+  min-height: 599px;
+}
 #content{
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  width: 100vw;
+  transition:all 300ms linear;
 }
 #sidebar .toggle-btn {
 position:absolute;
-left:220px;
-top:10px;
+right: 10px;
+/* top:10px; */
 }
 #sidebar .toggle-btn span {
 display:block;
@@ -121,7 +114,7 @@ margin:5px 0px;
 cursor:pointer;
 }
 #sidebar div.list{
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 #sidebar div.list div.item {
 padding:15px 10px;
@@ -129,5 +122,8 @@ border-bottom:1px solid #444;
 color:#fcfcfc;
 text-transform:uppercase;
 font-size:15px;
+}
+.item{
+     transition:all 300ms linear;
 }
 </style>

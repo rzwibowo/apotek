@@ -75,8 +75,8 @@
 import axios from 'axios'
 export default {
   name: 'Autorization',
-  created(){
-    this.Initialization();
+  created() {
+    this.Initialization()
   },
   data () {
     return {
@@ -98,7 +98,7 @@ export default {
       })
       .then(response => {
          if(response.data.length > 0){
-          this.$cookies.set("tokenUserApp",response.data[0].id_user,"7d");
+          this.$cookies.set("tokenUserApp",response.data[0].idKaryawan,"7d");
           this.$router.go('/Index')
          }
 
@@ -108,17 +108,16 @@ export default {
       })
     },
     Initialization(){
-      console.log(this.GetCokies());
       if(this.GetCokies() !== "" && this.GetCokies() !== null && this.GetCokies() !== "undefined"){
          this.$router.push("/Index");
       }else{
         this.User = {
-            IdUser:Number,
-            Username:null,
-            Password:null
-          }
+            IdUser:0,
+            Username:"",
+            Password:"",
+      }
      }
-    }
+   }
   }
 }
 </script>

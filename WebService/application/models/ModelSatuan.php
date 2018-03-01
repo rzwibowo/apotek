@@ -2,7 +2,7 @@
 /**
 *
 */
-class ModelGolongan extends CI_Model
+class ModelSatuan extends CI_Model
 {
 	public function __construct() {
 		parent::__construct();
@@ -10,13 +10,13 @@ class ModelGolongan extends CI_Model
 		//load database library
 		$this->load->database();
 	}
-	function GetGolongan()
+	function GetSatuan()
 	{
 		# code...
-		return $this->db->get('Golongan');
+		return $this->db->get('Satuan');
 	}
 
-	function InsertGolongan($Data,$Table)
+	function InsertSatuan($Data,$Table)
 	{
 		# code...
 		if($this->db->insert($Table,$Data)){
@@ -26,20 +26,20 @@ class ModelGolongan extends CI_Model
 		}
 	}
 
-	function DeleteGolongan($Where,$Table)
+	function DeleteSatuan($Where,$Table)
 	{
 		# code...
 		$this->db->where($Where);
 		$this->db->delete($Table);
 	}
 
-	function EditGolongan($Where,$Table)
+	function EditSatuan($Where,$Table)
 	{
 		# code...
 		return $this->db->get_where($Table,$Where);
 	}
 
-	function UpdateGolongan($Where,$Data,$Table)
+	function UpdateSatuan($Where,$Data,$Table)
 	{
 		# code...
 		$this->db->where($Where);
@@ -52,11 +52,11 @@ class ModelGolongan extends CI_Model
 	function GatById($Where,$Table)
 	{
 		# code...
-		return $this->db->get_where('Golongan',$Where);
+		return $this->db->get_where('Satuan',$Where);
 	}
 	function GetLike($param){
 		$this->db->select('*');
-		$this->db->from('Golongan');
+		$this->db->from('Satuan');
 	    $this->db->like($param);
 	return $this->db->get();
 	}

@@ -22,13 +22,23 @@ class Supplier extends REST_Controller
 		$Supplier=$this->MdSupplier->GetSupplier()->result();
 		$this->response($Supplier, 200);
 	}
+	function GetDataSupplier_post()
+	{
+		# code...
+		$Filter = $this->post('body');
+		$Supplier=$this->MdSupplier->GetSupplierWithFilter($Filter)->result();
+		$this->response($Supplier, 200);
+	}
 
 
 	function SaveDataSupplier_post()
 	{
 		// 		# code...
-		$Supplier = $this->post('body');
+		$Supplier = (object) $this->post('body');
+		$Date = date("Y-m-d H:i:s");
 		if($Supplier->IdSupplier == null){
+			$Supplier->TanggalDiBuat = $Date;
+			$Supplier->TanggalDiUbah = $Date;
 			if($this->MdSupplier->InsertSupplier($Supplier,'Supplier')){
 				$this->response(array('status' => 'sukses'), 200);
 			}else {
@@ -36,6 +46,7 @@ class Supplier extends REST_Controller
 			}
 		}
 		else{
+			$Supplier->TanggalDiUbah = $Date;
 			$Where=array(
 				'IdSupplier'=>$Supplier->IdSupplier
 			);

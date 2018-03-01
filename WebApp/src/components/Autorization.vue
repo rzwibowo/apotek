@@ -72,27 +72,32 @@
   </div>
 </template>
 <script>
+/* eslint-disable */
 import axios from 'axios'
 export default {
   name: 'Autorization',
+<<<<<<< HEAD
   created() {
+=======
+  created () {
+>>>>>>> 255c13e49a290f1e8cf9f083d4ef4958cb5b8246
     this.Initialization()
   },
   data () {
     return {
-      errors:[],
+      errors: [],
       User: {
-        IdUser:Number,
-        Username:String,
-        Password:String,
+        IdUser: Number,
+        Username: String,
+        Password: String,
       },
     }
   },
   methods:{
-    GetCokies(){
+    GetCokies () {
       return this.$cookies.get("tokenUserApp")
     },
-    LoginUser(){
+    LoginUser () {
       axios.post('http://localhost/apotek/webService/index.php/api/Login/UserAutorization', {
         body: this.User
       })

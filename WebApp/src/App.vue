@@ -25,37 +25,36 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   name: 'app',
-  created(){
-    this.GoAutorization();
-    this.ClassTongel = '';
+  created () {
+    this.GoAutorization()
+    this.ClassTongel = ''
   },
-    data () {
+  data () {
     return {
-      IsEnableNavbar:Boolean,
-      isActive:false,
+      IsEnableNavbar: Boolean,
+      isActive: false
     }
   },
   methods: {
-    GoAutorization(){
-      this.IsEnableNavbar = false;
-      if(this.GetCokies() !== "" && this.GetCokies() !== null && this.GetCokies() !== "undefined"){
-          this.$router.push("/Index");
-          this.IsEnableNavbar = true;
-      }else{
-        this.IsEnableNavbar = false;
-          this.$router.push("/Aut");
+    GoAutorization () {
+      this.IsEnableNavbar = false
+      if (this.GetCokies() !== '' && this.GetCokies() !== null && this.GetCokies() !== 'undefined') {
+        this.$router.push('/Index')
+        this.IsEnableNavbar = true
+      } else {
+        this.IsEnableNavbar = false
+        this.$router.push('/Aut')
       }
     },
-    GetCokies(){
-      return this.$cookies.get("tokenUserApp")
+    GetCokies () {
+      return this.$cookies.get('tokenUserApp')
     },
-    toggleSidebar(){
-      this.isActive = !this.isActive;
+    toggleSidebar () {
+      this.isActive = !this.isActive
     }
-
   }
 }
 </script>
@@ -123,7 +122,11 @@ color:#fcfcfc;
 text-transform:uppercase;
 font-size:15px;
 }
+<<<<<<< HEAD
 .item{
      transition:all 300ms linear;
 }
 </style>
+=======
+</style>
+>>>>>>> 255c13e49a290f1e8cf9f083d4ef4958cb5b8246

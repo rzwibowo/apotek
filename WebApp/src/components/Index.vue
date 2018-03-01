@@ -6,11 +6,11 @@
 
 <script>
 import Aut from '../App/Aut.js'
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   name: 'app',
-  created(){
-   //this.GetCokies();
+  created () {
+    // this.GetCokies();
   },
   mixins: [Aut],
   data () {

@@ -1,22 +1,19 @@
-
-import axios from 'axios'
-
+// import axios from 'axios'
 export default {
   name: 'Aut',
-  created(){
+  created () {
   },
   data () {
     return {
     }
   },
   methods: {
-    GetCokies(){
-      if(this.$cookies.get("tokenUserApp") !== "" && this.$cookies.get("tokenUserApp") !== null && this.$cookies.get("tokenUserApp") !== "undefined"){
+    GetCokies () {
+      if (this.$cookies.get('tokenUserApp') !== '' && this.$cookies.get('tokenUserApp') !== null && this.$cookies.get('tokenUserApp') !== 'undefined') {
         return true
-      }else{
-        this.$router.go('/Index');
+      } else {
+        this.$router.go('/Index')
       }
-
-    },
-  },
+    }
+  }
 }

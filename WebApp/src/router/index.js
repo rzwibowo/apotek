@@ -21,9 +21,9 @@ export default new Router({
       component: Index
     },
     {
-      path:'/Aut',
-      name:'Autorization',
-      component:Aut
+      path: '/Aut',
+      name: 'Autorization',
+      component: Aut
     },
     {
       path: '/obat',

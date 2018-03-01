@@ -26,14 +26,14 @@ export default {
     }
   },
   mounted () {
-    this.$parent.$on('toggleNav', () => {
+    this.$on('toggleNav', () => {
       console.log('resyivd')
       this.active = !this.active
     })
   },
   methods: {
     toggleNav () {
-      this.$parent.$emit('toggleNav')
+      this.$emit('toggleNav')
     }
   }
 }
@@ -50,13 +50,13 @@ export default {
   margin-top: 60px;
 }
 #sidebar {
-  display: flex;
+  display: none;
   width: 20em;
   background: #5c9feb;
   height: 100vh;
 }
 #sidebar.active{
-  display: block;
+  display: flex;
 }
 #sidebar a{
   display: block;

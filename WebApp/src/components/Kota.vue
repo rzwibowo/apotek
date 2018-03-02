@@ -52,7 +52,7 @@
           </div>
           <div class="modal-body">
             <form>
-              <div class="form-group row">
+              <div class="form-group row required">
                 <label class="col-form-label col-sm-5">Nama Kota</label>
                 <div class="col-sm-6">
                   <input class="form-control" name="Kota" v-model="Kota.NamaKota" type="text"  maxlength="30">
@@ -82,13 +82,6 @@
           </div>
           <div class="modal-body">
             <form>
-              <div class="form-group row">
-                <label class="col-form-label col-sm-5">Kode Kota</label>
-                <div class="col-sm-6">
-                  <input readonly class="form-control-plaintext datatampil" :value="Kota.KodeKota">
-                </div>
-              </div>
-
               <div class="form-group row">
                 <label class="col-form-label col-sm-5">Nama Kota</label>
                 <div class="col-sm-6">

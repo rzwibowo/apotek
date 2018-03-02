@@ -14,14 +14,9 @@ export default {
       } else {
         this.$router.go('/Index')
       }
-<<<<<<< HEAD
     },
    GetIdUser(){
-     return this.$cookies.get("tokenUserApp");
+     return this.$cookies.get("tokenUserApp")
    }
-  },
-=======
-    }
   }
->>>>>>> 255c13e49a290f1e8cf9f083d4ef4958cb5b8246
 }

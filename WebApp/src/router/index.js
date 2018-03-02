@@ -5,6 +5,8 @@ import Index from '@/components/Index'
 import Obat from '@/components/Obat'
 import Kategori from '@/components/Kategori'
 import Kota from '@/components/Kota'
+import Bank from '@/components/Bank'
+import IdentitasApotik from '@/components/IdentitasApotik'
 import Supplier from '@/components/Supplier'
 import Pembelian from '@/components/Pembelian'
 import PembelianForm from '@/components/PembelianForm'
@@ -75,6 +77,16 @@ export default new Router({
       path: '/Kota',
       name: 'Kota',
       component: Kota
+    },
+    {
+      path: '/Bank',
+      name: 'Bank',
+      component: Bank
+    },
+    {
+      path: '/IdentitasApotik',
+      name: 'Identitas Apotik',
+      component: IdentitasApotik
     },
   ]
 })

@@ -21,10 +21,10 @@
         <tr>
           <td></td>
           <td><input v-on:keyup="ChangeFilter(FilterModel.NamaPriode)" class="form-control" name="NamaPriode" v-model="FilterModel.NamaPriode" type="text" maxlength="30"></a>
-          <td><input v-on:keyup="ChangeFilter(FilterModel.TanggalMulai)" class="form-control" name="TanggalMulai" v-model="FilterModel.TanggalMulai" type="text" maxlength="30"></td>
-          <td><input v-on:keyup="ChangeFilter(FilterModel.TanggalAkhir)" class="form-control" name="TanggalAkhir" v-model="FilterModel.TanggalAkhir" type="text" maxlength="30"></td>
+          <td><input v-on:change="ChangeFilter(FilterModel.TanggalMulai)" class="form-control" name="TanggalMulai" v-model="FilterModel.TanggalMulai" type="date" maxlength="30"></td>
+          <td><input v-on:change="ChangeFilter(FilterModel.TanggalAkhir)" class="form-control" name="TanggalAkhir" v-model="FilterModel.TanggalAkhir" type="date" maxlength="30"></td>
           <td>
-            <select name="Status" v-model="FilterModel.Status" class="form-control" v-on:change="ChangeFilter(FilterModel.Status)">
+            <select name="Status" v-model="FilterModel.Status" class="form-control" v-on:change="ChangeFilterDropdown(FilterModel.Status)">
               <option value=''>Pilih</option>
               <option value="1">Aktif</option>
               <option value="0">Non Aktif</option>

@@ -14,7 +14,6 @@ export default {
       errors: [],
       Kota: {
         IdKota: Number,
-        KodeKota: String,
         NamaKota: String,
         DiBuatOlah:Number,
         DiUbahOleh:Number,
@@ -23,7 +22,6 @@ export default {
       },
       FilterModel:{
         IdKota: "",
-        KodeKota: "",
         NamaKota: "",
         DiBuatOlah:"",
         DiUbahOleh:"",
@@ -81,7 +79,6 @@ export default {
     AddKota(){
       this.Kota= {
         IdKota: null,
-        KodeKota: null,
         NamaKota: null,
         DiBuatOlah:this.GetIdUser(),
         DiUbahOleh:this.GetIdUser(),

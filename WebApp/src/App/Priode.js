@@ -3,11 +3,9 @@ import axios from 'axios'
 import Aut from '../App/Aut.js'
 
 //import Toolsmenu from '@/components/TemplateModal1'
-import test from '@/components/TemplateForm'
 
 export default {
   name: 'PriodeController',
-  components: {test},
   created(){
    this.GatDataPriode();
   },
@@ -107,6 +105,7 @@ export default {
         FilterParam.NamaPriode =this.FilterModel.NamaPriode;
       }
       if(this.FilterModel.TanggalMulai !== null && this.FilterModel.TanggalMulai !== "" ){
+        console.log(this.FilterModel.TanggalMulai);
         FilterParam.TanggalMulai =this.FilterModel.TanggalMulai;
       }
       if(this.FilterModel.TanggalAkhir !== null && this.FilterModel.TanggalAkhir !== "" ){
@@ -118,6 +117,7 @@ export default {
       return FilterParam;
     },
     ChangeFilter(Param){
+      console.log(this.FilterModel.TanggalMulai);
       if(Param.length > 2){
         this.GatDataPriode();
       }else if(Param.length == 0){

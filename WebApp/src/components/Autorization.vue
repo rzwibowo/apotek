@@ -76,11 +76,7 @@
 import axios from 'axios'
 export default {
   name: 'Autorization',
-<<<<<<< HEAD
   created() {
-=======
-  created () {
->>>>>>> 255c13e49a290f1e8cf9f083d4ef4958cb5b8246
     this.Initialization()
   },
   data () {

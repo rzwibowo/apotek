@@ -9,11 +9,14 @@
             <span></span>
           </div>
           <div class="list" v-show="isActive">
+          <div class="item"><router-link to="/IdentitasApotik" > Identitas Apotik </router-link></div>
           <div class="item"><router-link to="/obat" >Obat</router-link></div>
           <div class="item"><router-link to="/Kategori" >Kategori</router-link></div>
           <div class="item"><router-link to="/supplier" >Supplier</router-link></div>
           <div class="item"><router-link to="/pembelian" >Pembelian</router-link></div>
           <div class="item"><router-link to="/priode" >Priode</router-link></div>
+          <div class="item"><router-link to="/Kota" > Kota </router-link></div>
+          <div class="item"><router-link to="/Bank" > Bank </router-link></div>
           </div>
         </div>
         <div id="content" v-bind:class="{ 'col-md-10': isActive, 'col-md-11': !isActive }" >

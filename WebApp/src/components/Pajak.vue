@@ -9,7 +9,8 @@
           <tr>
             <th>No.</th>
             <th>Nama Pajak</th>
-            <th>Jenis Kartu</th>
+            <th>Besar Pajak</th>
+            <th>Status</th>
             <th></th>
           </tr>
         </thead>
@@ -18,10 +19,11 @@
           <tr>
             <td></td>
             <td><input v-on:keyup="ChangeFilter(FilterModel.NamaPajak)" class="form-control" name="NamaPajak" v-model="FilterModel.NamaPajak" type="text" maxlength="30"></td>
-            <td><select name="JenisKartu" v-on:change="ChangeFilterDropdown(FilterModel.JenisKartu)" class="form-control" v-model="FilterModel.JenisKartu">
+            <td><input v-on:keyup="ChangeFilterDropdown(FilterModel.BesarPajak)" class="form-control" name="BesarPajak" v-model="FilterModel.BesarPajak" type="text" maxlength="30"></td>
+            <td><select name="Status" v-on:change="ChangeFilterDropdown(FilterModel.Status)" class="form-control" v-model="FilterModel.Status">
                   <option value="">Pilih</option>
-                  <option value="1">Kredit</option>
-                  <option value="2">Debet</option>
+                  <option value="1">Aktif</option>
+                  <option value="0">Non Aktif</option>
                 </select>
             </td>
             <td></td>
@@ -30,7 +32,8 @@
           <tr v-for="(Pajaks,index) in Pajaks">
             <td>{{index + 1}}</td>
             <td><a  v-on:click="ViewPajak(Pajaks.IdPajak)" href="#">{{Pajaks.NamaPajak}}</a></td>
-            <td>{{Pajaks.JenisKartu == "1"? "Credit":"Debet"}}</td>
+            <td>{{Pajaks.BesarPajak}} %</td>
+            <td>{{Pajaks.Status == "1"? "Aktif":"Non Aktif"}}</td>
             <td class="text-center">
               <a  v-on:click="EditPajak(Pajaks.IdPajak)"  class="btn btn-outline-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
               <a  v-on:click="ViewPajak(Pajaks.IdPajak)" class="btn btn-outline-info"> <i class="fa fa-info" aria-hidden="true"></i></a>
@@ -61,19 +64,36 @@
           <div class="modal-body">
             <form>
               <div class="form-group row required">
-                <label class="col-form-label col-sm-5">Nama Pajak</label>
+                <label class="col-form-label col-sm-5">Pajak</label>
                 <div class="col-sm-6">
-                  <input class="form-control" name="Pajak" v-model="Pajak.NamaPajak" type="text"  maxlength="30">
+                  <input class="form-control" name="NamaPajak" v-model="Pajak.NamaPajak" type="text"  maxlength="30">
                 </div>
               </div>
               <div class="form-group row required">
-                <label class="col-form-label col-sm-5">Jenis Kartu</label>
+                <label class="col-form-label col-sm-5">Besar Pajak (%)</label>
                 <div class="col-sm-6">
-                <select name="JenisKartu"  v-model="Pajak.JenisKartu" class="form-control">
-                    <option value="">Pilih</option>
-                    <option value="1">Kredit</option>
-                    <option value="2">Debet</option>
-                </select>
+                  <input class="form-control" name="Besarpajak" v-model="Pajak.BesarPajak" type="number"  maxlength="30">
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-form-label col-sm-5">Status</label>
+                <div class="col-sm-6">
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="Status" v-model="Pajak.Status" value="1"  > Aktif
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="Status" v-model="Pajak.Status" value="0" > Non Aktif
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row required">
+                <label class="col-form-label col-sm-5">Keterangan</label>
+                <div class="col-sm-6">
+                  <textarea class="form-control" name="Keterangan" v-model="Pajak.Keterangan" rows="4"></textarea>
                 </div>
               </div>
 
@@ -107,9 +127,33 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-form-label col-sm-5">Jenis Kartu</label>
+                <label class="col-form-label col-sm-5">BesarPajak</label>
                 <div class="col-sm-6">
-                  <label class="form-control-plaintext datatampil">{{Pajak.JenisKartu == "1"? "Kredit":"Debet"}}</label>
+                  <label class="form-control-plaintext datatampil">{{Pajak.BesarPajak}} %</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Status</label>
+                <div class="col-sm-6">
+                  <label class="form-control-plaintext datatampil">{{Pajak.Status == "1"? "Aktif":"Non Aktif"}}</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Keterangan</label>
+                <div class="col-sm-6">
+                  <label class="form-control-plaintext datatampil">{{Pajak.Keterangan}}</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Tanggal Dibuat</label>
+                <div class="col-sm-6">
+                  <label class="form-control-plaintext datatampil">{{Pajak.TanggalDiBuat | formatDate}}</label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Tanggal Diubah</label>
+                <div class="col-sm-6">
+                  <label class="form-control-plaintext datatampil">{{Pajak.TanggalDiUbah | formatDate}}</label>
                 </div>
               </div>
             </form>

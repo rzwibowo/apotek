@@ -6,6 +6,8 @@ import Obat from '@/components/Obat'
 import Kategori from '@/components/Kategori'
 import Kota from '@/components/Kota'
 import Bank from '@/components/Bank'
+import Pajak from '@/components/Pajak'
+import Satuan from '@/components/Satuan'
 import IdentitasApotik from '@/components/IdentitasApotik'
 import Supplier from '@/components/Supplier'
 import Pembelian from '@/components/Pembelian'
@@ -88,5 +90,15 @@ export default new Router({
       name: 'Identitas Apotik',
       component: IdentitasApotik
     },
+    {
+      path: '/Pajak',
+      name: 'Pajak',
+      component: Pajak
+    },
+    {
+      path: '/Satuan',
+      name: 'Satuan',
+      component: Satuan
+    }
   ]
 })

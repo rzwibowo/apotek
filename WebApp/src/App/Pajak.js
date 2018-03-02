@@ -13,21 +13,26 @@ export default {
       Pajaks: [],
       errors: [],
       Pajak: {
-        IdPajak: Number,
-        NamaPajak: String,
-        DiBuatOlah:Number,
+        IdPajak:Number,
+        NamaPajak:String,
+        BesarPajak:Number,
+        Status:Boolean,
+        Keterangan:String,
+        DiBuatOleh:Number,
         DiUbahOleh:Number,
         TanggalDiBuat:Date,
-        TanggalDiUbah:Date,
+        TanggalDiUbah:Date
       },
       FilterModel:{
         IdPajak:"",
         NamaPajak:"",
-        JenisKartu:"",
-        DiBuatOlah:"",
+        BesarPajak:"",
+        Status:"",
+        Keterangan:"",
+        DiBuatOleh:"",
         DiUbahOleh:"",
         TanggalDiBuat:"",
-        TanggalDiUbah:"",
+        TanggalDiUbah:""
       },
     }
   },
@@ -79,23 +84,28 @@ export default {
     },
     AddPajak(){
       this.Pajak= {
-        IdPajak: null,
-        NamaPajak: null,
-        JenisKartu:"",
-        DiBuatOlah:this.GetIdUser(),
+        IdPajak:null,
+        NamaPajak:null,
+        BesarPajak:null,
+        Status:1,
+        Keterangan:null,
+        DiBuatOleh:this.GetIdUser(),
         DiUbahOleh:this.GetIdUser(),
-        TanggalDiBuat:Date,
-        TanggalDiUbah:Date,
+        TanggalDiBuat:null,
+        TanggalDiUbah:null
       },
       this.OpenModal ('ModalPajakForm');
     },
     Filter(){
       var FilterParam = {};
-      if(this.FilterModel.JenisKartu !== "" && this.FilterModel.JenisKartu !== null ){
-        FilterParam.JenisKartu =this.FilterModel.JenisKartu;
+      if(this.FilterModel.Status !== "" && this.FilterModel.Status !== null ){
+        FilterParam.Status =this.FilterModel.Status;
       }
       if(this.FilterModel.NamaPajak !== null && this.FilterModel.NamaPajak !== "" ){
         FilterParam.NamaPajak =this.FilterModel.NamaPajak;
+      }
+      if(this.FilterModel.BesarPajak !== null && this.FilterModel.BesarPajak !== "" ){
+        FilterParam.BesarPajak =this.FilterModel.BesarPajak;
       }
       return FilterParam;
     },

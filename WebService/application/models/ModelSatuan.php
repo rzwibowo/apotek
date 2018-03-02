@@ -16,6 +16,17 @@ class ModelSatuan extends CI_Model
 		return $this->db->get('Satuan');
 	}
 
+	function GetSatuanWithFilter($Filter)
+	{
+		# code...
+		$this->db->select('*');
+		$this->db->from('Satuan');
+		if(count($Filter) > 0){
+			$this->db->like($Filter);
+		}
+	  return $this->db->get();
+	}
+
 	function InsertSatuan($Data,$Table)
 	{
 		# code...

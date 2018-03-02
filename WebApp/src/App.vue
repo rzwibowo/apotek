@@ -17,6 +17,8 @@
           <div class="item"><router-link to="/priode" >Priode</router-link></div>
           <div class="item"><router-link to="/Kota" > Kota </router-link></div>
           <div class="item"><router-link to="/Bank" > Bank </router-link></div>
+          <div class="item"><router-link to="/Pajak" > Pajak </router-link></div>
+          <div class="item"><router-link to="/Satuan" > Satuan </router-link></div>
           </div>
         </div>
         <div id="content" v-bind:class="{ 'col-md-10': isActive, 'col-md-11': !isActive }" >

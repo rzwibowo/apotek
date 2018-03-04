@@ -15,7 +15,7 @@ export default {
       Kota: {
         IdKota: Number,
         NamaKota: String,
-        DiBuatOlah:Number,
+        DiBuatOleh:Number,
         DiUbahOleh:Number,
         TanggalDiBuat:Date,
         TanggalDiUbah:Date,
@@ -23,7 +23,7 @@ export default {
       FilterModel:{
         IdKota: "",
         NamaKota: "",
-        DiBuatOlah:"",
+        DiBuatOleh:"",
         DiUbahOleh:"",
         TanggalDiBuat:"",
         TanggalDiUbah:"",
@@ -80,7 +80,7 @@ export default {
       this.Kota= {
         IdKota: null,
         NamaKota: null,
-        DiBuatOlah:this.GetIdUser(),
+        DiBuatOleh:this.GetIdUser(),
         DiUbahOleh:this.GetIdUser(),
         TanggalDiBuat:Date,
         TanggalDiUbah:Date,

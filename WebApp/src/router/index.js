@@ -8,12 +8,15 @@ import Kota from '@/components/Kota'
 import Bank from '@/components/Bank'
 import Pajak from '@/components/Pajak'
 import Satuan from '@/components/Satuan'
+import Group from '@/components/Group'
+import Karyawan from '@/components/Karyawan'
 import IdentitasApotik from '@/components/IdentitasApotik'
 import Supplier from '@/components/Supplier'
 import Pembelian from '@/components/Pembelian'
 import PembelianForm from '@/components/PembelianForm'
 import PembelianView from '@/components/PembelianView'
 import PenjualanForm from '@/components/PenjualanForm'
+import StokOpname from '@/components/StokOpname'
 import Priode from '@/components/Priode'
 
 Vue.use(Router)
@@ -99,6 +102,21 @@ export default new Router({
       path: '/Satuan',
       name: 'Satuan',
       component: Satuan
+    },
+    {
+      path: '/Group',
+      name: 'Group',
+      component: Group
+    },
+    {
+      path: '/Karyawan',
+      name: 'Karyawan',
+      component: Karyawan
+    },
+    {
+      path: '/StokOpname',
+      name: 'StokOpname',
+      component: StokOpname
     }
   ]
 })

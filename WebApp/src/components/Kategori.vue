@@ -55,17 +55,23 @@
           </div>
           <div class="modal-body">
             <form>
-              <div class="form-group row">
+              <div class="form-group row required">
                 <label class="col-form-label col-sm-5">Kode Kategori</label>
                 <div class="col-sm-6">
                   <input class="form-control" name="kode_Kategori" v-model="Kategori.KodeKategori" type="text"  maxlength="30">
                 </div>
               </div>
 
-              <div class="form-group row">
+              <div class="form-group row required">
                 <label class="col-form-label col-sm-5">Kategori</label>
                 <div class="col-sm-6">
                   <input class="form-control" name="Kategori" v-model="Kategori.NamaKategori" type="text"  maxlength="30">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Keterangan</label>
+                <div class="col-sm-6">
+                  <textarea class="form-control" name="Keterangan" v-model="Kategori.Keterangan" rows="4"></textarea>
                 </div>
               </div>
 
@@ -91,21 +97,25 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
               <div class="form-group row">
                 <label class="col-form-label col-sm-5">Kode Kategori</label>
                 <div class="col-sm-6">
-                  <input readonly class="form-control-plaintext datatampil" :value="Kategori.KodeKategori">
+                  <label class="form-control-plaintext datatampil">{{Kategori.KodeKategori}}</label>
                 </div>
               </div>
 
               <div class="form-group row">
                 <label class="col-form-label col-sm-5">Nama Kategori</label>
                 <div class="col-sm-6">
-                  <input readonly class="form-control-plaintext datatampil" :value="Kategori.NamaKategori">
+                  <label class="form-control-plaintext datatampil">{{Kategori.NamaKategori}}</label>
                 </div>
               </div>
-            </form>
+              <div class="form-group row">
+                <label class="col-form-label col-sm-5">Keterangan</label>
+                <div class="col-sm-6">
+                  <label class="form-control-plaintext datatampil">{{Kategori.Keterangan}}</label>
+                </div>
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" v-on:click="CloseModal('ModalKategoriView')" class="btn btn-secondary">Tutup</button>

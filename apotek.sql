@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26 Feb 2018 pada 08.53
+-- Generation Time: 06 Mar 2018 pada 02.57
 -- Versi Server: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -33,9 +33,22 @@ CREATE TABLE `apotik` (
   `NamaApotik` varchar(255) NOT NULL,
   `AlamatApotik` varchar(255) NOT NULL,
   `IdKota` int(11) NOT NULL,
-  `NoRekening` varchar(20) NOT NULL,
-  `NamaPemilik` varchar(255) NOT NULL
+  `NoRegistrasi` varchar(20) NOT NULL,
+  `NamaPemilik` varchar(255) NOT NULL,
+  `DiBuatOlah` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL,
+  `NoTelepon` varchar(20) NOT NULL,
+  `Slogan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `apotik`
+--
+
+INSERT INTO `apotik` (`IdApotik`, `NamaApotik`, `AlamatApotik`, `IdKota`, `NoRegistrasi`, `NamaPemilik`, `DiBuatOlah`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`, `NoTelepon`, `Slogan`) VALUES
+(3, 'sssdsd', 'sddsd', 1, '088888', 'dffdf', 1, 1, '2018-03-02 10:20:48', '2018-03-04 05:11:51', '0987654', 'dfdfdfdfd');
 
 -- --------------------------------------------------------
 
@@ -46,8 +59,20 @@ CREATE TABLE `apotik` (
 CREATE TABLE `bank` (
   `IdBank` int(11) NOT NULL,
   `NamaBank` varchar(255) NOT NULL,
-  `JenisKartu` enum('1','2') NOT NULL
+  `JenisKartu` enum('1','2') NOT NULL,
+  `DiBuatOlah` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `bank`
+--
+
+INSERT INTO `bank` (`IdBank`, `NamaBank`, `JenisKartu`, `DiBuatOlah`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 'BCA', '1', 1, 1, '2018-02-28 00:00:00', '2018-02-28 00:00:00'),
+(2, 'Bank Mandiri', '1', 1, 1, '2018-03-02 05:06:36', '2018-03-02 05:06:36');
 
 -- --------------------------------------------------------
 
@@ -60,7 +85,11 @@ CREATE TABLE `bayarpembelian` (
   `IdPembelian` int(11) NOT NULL,
   `TanggalPembayaran` date NOT NULL,
   `TotalBayar` int(11) NOT NULL,
-  `JenisPembayaran` enum('1','2') NOT NULL
+  `JenisPembayaran` enum('1','2') NOT NULL,
+  `DiBuatOleh` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -81,14 +110,26 @@ CREATE TABLE `detailracik` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `group`
+-- Struktur dari tabel `groupuser`
 --
 
-CREATE TABLE `group` (
-  `idGroup` int(11) NOT NULL,
+CREATE TABLE `groupuser` (
+  `IdGroup` int(11) NOT NULL,
   `NamaGroup` varchar(255) NOT NULL,
-  `Keterangan` text NOT NULL
+  `Keterangan` text NOT NULL,
+  `DiBuatOleh` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `groupuser`
+--
+
+INSERT INTO `groupuser` (`IdGroup`, `NamaGroup`, `Keterangan`, `DiBuatOleh`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 'Admin', 'ok', 0, 1, '0000-00-00 00:00:00', '2018-03-03 05:30:59'),
+(2, 'kasir 1', 'fdg', 1, 1, '2018-03-03 05:32:44', '2018-03-03 05:32:44');
 
 -- --------------------------------------------------------
 
@@ -127,19 +168,32 @@ CREATE TABLE `jenisracikan` (
 --
 
 CREATE TABLE `karyawan` (
-  `idKaryawan` int(11) NOT NULL,
-  `idGroup` int(11) NOT NULL,
+  `IdKaryawan` int(11) NOT NULL,
+  `IdGroup` int(11) NOT NULL,
   `NamaLengkap` varchar(255) NOT NULL,
   `UserName` varchar(255) NOT NULL,
   `Password` varchar(255) NOT NULL,
-  `TanggalLahir` date NOT NULL,
+  `TanggalLahir` date DEFAULT NULL,
   `JenisKelamin` enum('0','1') NOT NULL,
   `NoTelepon` varchar(255) NOT NULL,
-  `NoTeleponDarurat` varchar(255) NOT NULL,
+  `NoTeleponDarurat` varchar(255) DEFAULT NULL,
   `Alamat` text NOT NULL,
   `IsApoteker` int(11) NOT NULL,
-  `NoRegistrasiApoteker` int(11) NOT NULL
+  `NoRegistrasiApoteker` varchar(11) DEFAULT NULL,
+  `DiBuatOleh` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `karyawan`
+--
+
+INSERT INTO `karyawan` (`IdKaryawan`, `IdGroup`, `NamaLengkap`, `UserName`, `Password`, `TanggalLahir`, `JenisKelamin`, `NoTelepon`, `NoTeleponDarurat`, `Alamat`, `IsApoteker`, `NoRegistrasiApoteker`, `DiBuatOleh`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 1, 'Admin', 'Admin', '5449ccea16d1cc73990727cd835e45b5', '2018-02-08', '0', '0987655443', '098765443', 'text', 1, '98765', 0, 1, '0000-00-00 00:00:00', '2018-03-03 13:51:50'),
+(2, 1, 'admin01', '', '21232f297a57a5a743894a0e4a801fc3', '2018-03-16', '0', '0987654', NULL, 'kjhgfd', 0, NULL, 1, 1, '2018-03-03 12:56:11', '2018-03-03 12:56:11'),
+(3, 1, 'admin2', 'admin2', '21232f297a57a5a743894a0e4a801fc3', NULL, '', '0987654', NULL, 'kjuhygtfd', 0, NULL, 1, 1, '2018-03-03 12:58:28', '2018-03-03 12:58:28');
 
 -- --------------------------------------------------------
 
@@ -151,21 +205,27 @@ CREATE TABLE `kategori` (
   `IdKategori` int(11) NOT NULL,
   `KodeKategori` char(4) NOT NULL,
   `NamaKategori` varchar(30) NOT NULL,
-  `Keterangan` varchar(255) NOT NULL
+  `Keterangan` varchar(255) DEFAULT NULL,
+  `DiBuatOlah` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data untuk tabel `kategori`
 --
 
-INSERT INTO `kategori` (`IdKategori`, `KodeKategori`, `NamaKategori`, `Keterangan`) VALUES
-(1, 'yad', 'agak waras', ''),
-(2, '0w', 'Kb', ''),
-(3, '3DS', 'sdsdds', ''),
-(4, '3DG', 'sadsd', ''),
-(5, 'SE3', 'Golongan', ''),
-(6, 'SE2', 'Golongan', ''),
-(7, 'SE2', 'Golongan', '');
+INSERT INTO `kategori` (`IdKategori`, `KodeKategori`, `NamaKategori`, `Keterangan`, `DiBuatOlah`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 'yad', 'agak waras', '', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, '0w', 'Kb', '', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, '3DS', 'sdsdds', '', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, '3DG', 'sadsd', '', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'SE3', 'Golongan', '', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'SE2', 'Golongan', '', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'SE2', 'Golongan', '', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'Test', 'Test pertama', '', 1, 1, '2018-02-27 00:00:00', '2018-02-27 04:46:23'),
+(9, '03e', 'Kesehatan', 'ok', 1, 1, '2018-03-03 14:31:40', '2018-03-03 14:31:55');
 
 -- --------------------------------------------------------
 
@@ -175,8 +235,21 @@ INSERT INTO `kategori` (`IdKategori`, `KodeKategori`, `NamaKategori`, `Keteranga
 
 CREATE TABLE `kota` (
   `IdKota` int(11) NOT NULL,
-  `NamaKota` varchar(255) NOT NULL
+  `NamaKota` varchar(255) NOT NULL,
+  `DiBuatOleh` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `kota`
+--
+
+INSERT INTO `kota` (`IdKota`, `NamaKota`, `DiBuatOleh`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 'Jogja1', 1, 1, '2018-02-27 00:00:00', '2018-03-02 04:53:25'),
+(2, 'Semarang', 1, 1, '2018-03-02 04:55:07', '2018-03-02 04:55:07'),
+(3, 'Surabaya', 1, 1, '2018-03-03 05:33:02', '2018-03-03 05:33:02');
 
 -- --------------------------------------------------------
 
@@ -188,15 +261,27 @@ CREATE TABLE `obat` (
   `IdObat` int(11) NOT NULL,
   `IdKategori` int(11) NOT NULL,
   `NamaObat` varchar(30) NOT NULL,
-  `StokObat` int(11) NOT NULL,
+  `StokObat` int(11) DEFAULT NULL,
   `HargaSatuan` int(11) NOT NULL,
   `TanggalKadaluarsa` date NOT NULL,
   `KodeObat` varchar(25) NOT NULL,
   `IdSatuan` int(11) NOT NULL,
   `StokMinimal` int(11) NOT NULL,
-  `StokMaximal` int(11) NOT NULL,
-  `keterangan` varchar(255) NOT NULL
+  `StokMaximal` int(11) DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
+  `DiBuatOlah` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `obat`
+--
+
+INSERT INTO `obat` (`IdObat`, `IdKategori`, `NamaObat`, `StokObat`, `HargaSatuan`, `TanggalKadaluarsa`, `KodeObat`, `IdSatuan`, `StokMinimal`, `StokMaximal`, `keterangan`, `DiBuatOlah`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 1, 'aassas', 34, 40, '2018-02-23', 'yad00001', 1, 344, 23, NULL, 0, 1, '0000-00-00 00:00:00', '2018-02-26 00:00:00'),
+(2, 2, 'ddsd', 31, 35, '2018-02-22', '0w00002', 1, 33, 34, NULL, 1, 1, '2018-02-26 00:00:00', '2018-02-27 04:47:57');
 
 -- --------------------------------------------------------
 
@@ -209,8 +294,19 @@ CREATE TABLE `pajak` (
   `NamaPajak` varchar(255) NOT NULL,
   `BesarPajak` int(11) NOT NULL,
   `Status` enum('0','1') NOT NULL,
-  `Keterangan` varchar(255) NOT NULL
+  `Keterangan` varchar(255) NOT NULL,
+  `DiBuatOleh` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pajak`
+--
+
+INSERT INTO `pajak` (`IdPajak`, `NamaPajak`, `BesarPajak`, `Status`, `Keterangan`, `DiBuatOleh`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 'Test pajak', 4, '1', 'sdd', 1, 1, '2018-03-02 11:12:44', '2018-03-02 11:29:22');
 
 -- --------------------------------------------------------
 
@@ -308,20 +404,36 @@ CREATE TABLE `persediaan` (
 --
 
 CREATE TABLE `priode` (
-  `IdPeriode` int(11) NOT NULL,
+  `IdPriode` int(11) NOT NULL,
   `NamaPriode` varchar(255) NOT NULL,
   `TanggalMulai` date NOT NULL,
   `TanggalAkhir` date NOT NULL,
-  `Status` enum('0','1') NOT NULL
+  `Status` enum('0','1') NOT NULL,
+  `DiBuatOleh` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `priode`
+--
+
+INSERT INTO `priode` (`IdPriode`, `NamaPriode`, `TanggalMulai`, `TanggalAkhir`, `Status`, `DiBuatOleh`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 'Priode 2015', '2015-01-01', '2015-12-30', '1', 1, 1, '2018-02-22 00:00:00', '2018-03-02 04:35:59'),
+(11, 'sdsd', '2018-02-16', '2018-02-27', '1', 1, 1, '2018-02-27 11:39:39', '2018-02-27 11:39:39'),
+(12, 'sdsdsd', '2018-02-16', '2018-02-17', '1', 1, 1, '2018-02-27 11:42:30', '2018-02-27 11:42:30'),
+(13, 'ssdd', '2018-02-17', '2018-02-23', '0', 1, 1, '2018-02-27 11:42:46', '2018-02-27 11:42:46'),
+(14, 'dffdf', '2018-02-16', '2018-02-23', '0', 1, 1, '2018-02-27 11:43:08', '2018-02-27 11:43:08'),
+(15, 'ddfdfdf', '2018-02-17', '2018-02-23', '0', 1, 1, '2018-02-27 11:43:33', '2018-02-27 11:43:33');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `racik`
+-- Struktur dari tabel `racikan`
 --
 
-CREATE TABLE `racik` (
+CREATE TABLE `racikan` (
   `IdRacik` int(11) NOT NULL,
   `IdJenisRacikan` int(11) NOT NULL,
   `HargaRacik` int(11) NOT NULL
@@ -336,8 +448,20 @@ CREATE TABLE `racik` (
 CREATE TABLE `satuan` (
   `IdSatuan` int(11) NOT NULL,
   `NamaSatuan` varchar(255) NOT NULL,
-  `Keterangan` varchar(255) NOT NULL
+  `Keterangan` varchar(255) DEFAULT NULL,
+  `DiBuatOleh` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `satuan`
+--
+
+INSERT INTO `satuan` (`IdSatuan`, `NamaSatuan`, `Keterangan`, `DiBuatOleh`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 'Botol', NULL, 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'test 1', 'ok', 1, 1, '2018-03-21 00:00:00', '2018-03-02 12:07:53');
 
 -- --------------------------------------------------------
 
@@ -347,9 +471,22 @@ CREATE TABLE `satuan` (
 
 CREATE TABLE `stokopname` (
   `IdStokOpname` int(11) NOT NULL,
-  `idObat` int(11) NOT NULL,
-  `StokOpname` int(11) NOT NULL
+  `IdObat` int(11) NOT NULL,
+  `StokOpname` int(11) NOT NULL,
+  `DiBuatOleh` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL,
+  `Keterangan` varchar(255) DEFAULT NULL,
+  `StokObat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `stokopname`
+--
+
+INSERT INTO `stokopname` (`IdStokOpname`, `IdObat`, `StokOpname`, `DiBuatOleh`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`, `Keterangan`, `StokObat`) VALUES
+(1, 1, 21, 1, 1, '2018-03-03 16:59:18', '2018-03-03 19:29:29', 'Priode ini', 34);
 
 -- --------------------------------------------------------
 
@@ -364,12 +501,23 @@ CREATE TABLE `supplier` (
   `Status` tinyint(1) NOT NULL,
   `Alamat` text NOT NULL,
   `NoHp` varchar(20) NOT NULL,
-  `ContactPerson` varchar(25) NOT NULL,
-  `IdBank` int(11) NOT NULL,
-  `Email` varchar(255) NOT NULL,
+  `ContactPerson` varchar(25) DEFAULT NULL,
+  `IdBank` int(11) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
   `IdKota` int(11) NOT NULL,
-  `Website` varchar(255) NOT NULL
+  `Website` varchar(255) DEFAULT NULL,
+  `DiBuatOleh` int(11) NOT NULL,
+  `DiUbahOleh` int(11) NOT NULL,
+  `TanggalDiBuat` datetime NOT NULL,
+  `TanggalDiUbah` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `supplier`
+--
+
+INSERT INTO `supplier` (`IdSupplier`, `NamaSupplier`, `NomorTelepon`, `Status`, `Alamat`, `NoHp`, `ContactPerson`, `IdBank`, `Email`, `IdKota`, `Website`, `DiBuatOleh`, `DiUbahOleh`, `TanggalDiBuat`, `TanggalDiUbah`) VALUES
+(1, 'SDSDS', '00000', 1, 'cdfdf', '232323', '232323', 1, 'sahrun@gmail.com', 1, NULL, 1, 1, '2018-02-27 08:32:05', '2018-02-27 09:05:46');
 
 --
 -- Indexes for dumped tables
@@ -404,10 +552,10 @@ ALTER TABLE `detailracik`
   ADD KEY `IdObat` (`IdObat`);
 
 --
--- Indexes for table `group`
+-- Indexes for table `groupuser`
 --
-ALTER TABLE `group`
-  ADD PRIMARY KEY (`idGroup`);
+ALTER TABLE `groupuser`
+  ADD PRIMARY KEY (`IdGroup`);
 
 --
 -- Indexes for table `jenisracikan`
@@ -419,8 +567,8 @@ ALTER TABLE `jenisracikan`
 -- Indexes for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  ADD PRIMARY KEY (`idKaryawan`),
-  ADD KEY `idGroup` (`idGroup`);
+  ADD PRIMARY KEY (`IdKaryawan`),
+  ADD KEY `idGroup` (`IdGroup`);
 
 --
 -- Indexes for table `kategori`
@@ -487,12 +635,12 @@ ALTER TABLE `persediaan`
 -- Indexes for table `priode`
 --
 ALTER TABLE `priode`
-  ADD PRIMARY KEY (`IdPeriode`);
+  ADD PRIMARY KEY (`IdPriode`);
 
 --
--- Indexes for table `racik`
+-- Indexes for table `racikan`
 --
-ALTER TABLE `racik`
+ALTER TABLE `racikan`
   ADD PRIMARY KEY (`IdRacik`),
   ADD KEY `IdJenisRacikan` (`IdJenisRacikan`);
 
@@ -507,7 +655,7 @@ ALTER TABLE `satuan`
 --
 ALTER TABLE `stokopname`
   ADD PRIMARY KEY (`IdStokOpname`),
-  ADD KEY `idObat` (`idObat`);
+  ADD KEY `idObat` (`IdObat`);
 
 --
 -- Indexes for table `supplier`
@@ -525,12 +673,12 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `apotik`
 --
 ALTER TABLE `apotik`
-  MODIFY `IdApotik` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdApotik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `IdBank` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdBank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `bayarpembelian`
 --
@@ -542,10 +690,10 @@ ALTER TABLE `bayarpembelian`
 ALTER TABLE `detailracik`
   MODIFY `IdDetailRacik` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `group`
+-- AUTO_INCREMENT for table `groupuser`
 --
-ALTER TABLE `group`
-  MODIFY `idGroup` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `groupuser`
+  MODIFY `IdGroup` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `jenisracikan`
 --
@@ -555,72 +703,77 @@ ALTER TABLE `jenisracikan`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `idKaryawan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdKaryawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `IdKategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `IdKategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `kota`
 --
 ALTER TABLE `kota`
-  MODIFY `IdKota` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdKota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `IdObat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `IdObat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `pajak`
 --
 ALTER TABLE `pajak`
-  MODIFY `IdPajak` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdPajak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `IdPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `IdPembelian` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `pembeliandetail`
 --
 ALTER TABLE `pembeliandetail`
-  MODIFY `IdDetailPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `IdDetailPembelian` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `IdPenjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `IdPenjualan` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `penjualandetail`
 --
 ALTER TABLE `penjualandetail`
-  MODIFY `IdDetailJual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `IdDetailJual` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `persediaan`
 --
 ALTER TABLE `persediaan`
   MODIFY `IdPersediaan` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `racik`
+-- AUTO_INCREMENT for table `priode`
 --
-ALTER TABLE `racik`
+ALTER TABLE `priode`
+  MODIFY `IdPriode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT for table `racikan`
+--
+ALTER TABLE `racikan`
   MODIFY `IdRacik` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `satuan`
 --
 ALTER TABLE `satuan`
-  MODIFY `IdSatuan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdSatuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `stokopname`
 --
 ALTER TABLE `stokopname`
-  MODIFY `IdStokOpname` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdStokOpname` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `IdSupplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IdSupplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -641,14 +794,14 @@ ALTER TABLE `bayarpembelian`
 -- Ketidakleluasaan untuk tabel `detailracik`
 --
 ALTER TABLE `detailracik`
-  ADD CONSTRAINT `detailracik_ibfk_1` FOREIGN KEY (`IdRacik`) REFERENCES `racik` (`IdRacik`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detailracik_ibfk_1` FOREIGN KEY (`IdRacik`) REFERENCES `racikan` (`IdRacik`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `detailracik_ibfk_2` FOREIGN KEY (`IdObat`) REFERENCES `obat` (`IdObat`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `karyawan`
 --
 ALTER TABLE `karyawan`
-  ADD CONSTRAINT `karyawan_ibfk_1` FOREIGN KEY (`idGroup`) REFERENCES `group` (`idGroup`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `karyawan_ibfk_1` FOREIGN KEY (`idGroup`) REFERENCES `groupuser` (`idGroup`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `obat`
@@ -678,10 +831,10 @@ ALTER TABLE `penjualandetail`
   ADD CONSTRAINT `penjualandetail_ibfk_2` FOREIGN KEY (`IdPenjualan`) REFERENCES `penjualan` (`IdPenjualan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `racik`
+-- Ketidakleluasaan untuk tabel `racikan`
 --
-ALTER TABLE `racik`
-  ADD CONSTRAINT `racik_ibfk_1` FOREIGN KEY (`IdJenisRacikan`) REFERENCES `jenisracikan` (`IdJenisRacikan`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `racikan`
+  ADD CONSTRAINT `racikan_ibfk_1` FOREIGN KEY (`IdJenisRacikan`) REFERENCES `jenisracikan` (`IdJenisRacikan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `stokopname`

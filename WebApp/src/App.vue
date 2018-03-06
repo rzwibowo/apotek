@@ -130,4 +130,7 @@ color:#fcfcfc;
 text-transform:uppercase;
 font-size:15px;
 }
+.item{
+     transition:all 300ms linear;
+}
 </style>

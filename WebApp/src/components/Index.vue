@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-
   </div>
 </template>
 
@@ -32,13 +31,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+/* 
 #app {
   display: flex;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #32383f;
   margin-top: 60px;
 }
@@ -61,5 +60,5 @@ export default {
   align-items: stretch;
   flex-direction: column;
   width: 100vw;
-}
+} */
 </style>

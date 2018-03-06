@@ -1,7 +1,14 @@
-.navbar {
+* {
+  border-radius: 0 !important;
+}
+.form-group.required .col-form-label:after {
+   content:" *";
+   color:red;
+}
+/* .navbar {
     border-radius: 0;
 }
 
 .content {
     min-height: 35rem;
-}
+} */

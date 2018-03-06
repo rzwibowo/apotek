@@ -15,8 +15,8 @@ export default {
         this.$router.go('/Index')
       }
     },
-   GetIdUser(){
-     return this.$cookies.get("tokenUserApp")
-   }
+    GetIdUser () {
+      return this.$cookies.get('tokenUserApp')
+    }
   }
 }

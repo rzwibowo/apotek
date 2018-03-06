@@ -20,103 +20,113 @@ import StokOpname from '@/components/StokOpname'
 import Priode from '@/components/Priode'
 
 Vue.use(Router)
+let router = new Router({
+    routes:getRoute()
+});
+function getRoute() {
+  var route = [
+  {
+   path: "*",
+   name: 'Index',
+   redirect: '/Index'
+  },
+  {
+    path: '/Index',
+    name: 'Index',
+    component: Index
+  },
+  {
+    path: '/Aut',
+    name: 'Autorization',
+    component: Aut
+  },
+  {
+    path: '/obat',
+    name: 'Obat',
+    component: Obat
+  },
+  {
+    path: '/Kategori',
+    name: 'Kategori',
+    component: Kategori
+  },
+  {
+    path: '/supplier',
+    name: 'Supplier',
+    component: Supplier
+  },
+  {
+    path: '/Pembelian',
+    name: 'PembelianFormController',
+    component: Pembelian
+  },
+  {
+    path: '/PembelianForm',
+    name: 'PembelianFormController',
+    component: PembelianForm
+  },
+  {
+    path: '/PembelianForm/:IdPembelian',
+    name: 'UpdatePembelian',
+    component: PembelianForm
+  },
+  {
+    path: '/PembelianView/:IdPembelian',
+    name: 'ViewPembelian',
+    component: PembelianView
+  },
+  {
+    path: '/PenjualanForm/',
+    name: 'PenjualanForm',
+    component: PenjualanForm
+  },
+  {
+    path: '/Priode/',
+    name: 'Priode',
+    component: Priode
+  },
+  {
+    path: '/Kota',
+    name: 'Kota',
+    component: Kota
+  },
+  {
+    path: '/Bank',
+    name: 'Bank',
+    component: Bank
+  },
+  {
+    path: '/IdentitasApotik',
+    name: 'Identitas Apotik',
+    component: IdentitasApotik
+  },
+  {
+    path: '/Pajak',
+    name: 'Pajak',
+    component: Pajak
+  },
+  {
+    path: '/Satuan',
+    name: 'Satuan',
+    component: Satuan
+  },
+  {
+    path: '/Group',
+    name: 'Group',
+    component: Group
+  },
+  {
+    path: '/Karyawan',
+    name: 'Karyawan',
+    component: Karyawan
+  },
+  {
+    path: '/StokOpname',
+    name: 'StokOpname',
+    component: StokOpname
+  }
+];
+return route;
+};
 
-export default new Router({
-  routes: [
-    {
-      path: '/Index',
-      name: 'Index',
-      component: Index
-    },
-    {
-      path: '/Aut',
-      name: 'Autorization',
-      component: Aut
-    },
-    {
-      path: '/obat',
-      name: 'Obat',
-      component: Obat
-    },
-    {
-      path: '/Kategori',
-      name: 'Kategori',
-      component: Kategori
-    },
-    {
-      path: '/supplier',
-      name: 'Supplier',
-      component: Supplier
-    },
-    {
-      path: '/Pembelian',
-      name: 'PembelianFormController',
-      component: Pembelian
-    },
-    {
-      path: '/PembelianForm',
-      name: 'PembelianFormController',
-      component: PembelianForm
-    },
-    {
-      path: '/PembelianForm/:IdPembelian',
-      name: 'UpdatePembelian',
-      component: PembelianForm
-    },
-    {
-      path: '/PembelianView/:IdPembelian',
-      name: 'ViewPembelian',
-      component: PembelianView
-    },
-    {
-      path: '/PenjualanForm/',
-      name: 'PenjualanForm',
-      component: PenjualanForm
-    },
-    {
-      path: '/Priode/',
-      name: 'Priode',
-      component: Priode
-    },
-    {
-      path: '/Kota',
-      name: 'Kota',
-      component: Kota
-    },
-    {
-      path: '/Bank',
-      name: 'Bank',
-      component: Bank
-    },
-    {
-      path: '/IdentitasApotik',
-      name: 'Identitas Apotik',
-      component: IdentitasApotik
-    },
-    {
-      path: '/Pajak',
-      name: 'Pajak',
-      component: Pajak
-    },
-    {
-      path: '/Satuan',
-      name: 'Satuan',
-      component: Satuan
-    },
-    {
-      path: '/Group',
-      name: 'Group',
-      component: Group
-    },
-    {
-      path: '/Karyawan',
-      name: 'Karyawan',
-      component: Karyawan
-    },
-    {
-      path: '/StokOpname',
-      name: 'StokOpname',
-      component: StokOpname
-    }
-  ]
-})
+export default router;

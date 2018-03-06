@@ -130,11 +130,7 @@ color:#fcfcfc;
 text-transform:uppercase;
 font-size:15px;
 }
-<<<<<<< HEAD
 .item{
      transition:all 300ms linear;
 }
 </style>
-=======
-</style>
->>>>>>> 255c13e49a290f1e8cf9f083d4ef4958cb5b8246

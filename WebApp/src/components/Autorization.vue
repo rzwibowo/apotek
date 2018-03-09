@@ -99,7 +99,7 @@ export default {
       })
       .then(response => {
          if(response.data.length > 0){
-          this.$cookies.set("tokenUserApp",response.data[0].idKaryawan,"7d");
+          this.$cookies.set("tokenUserApp",response.data[0].IdKaryawan,"7d");
           this.$router.go('/Index')
          }
 

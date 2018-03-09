@@ -22,6 +22,6 @@ class Login extends REST_Controller {
 		# code...
     $UserPost = $this->post('body');
 		$User=$this->ModelLogin->AutUser($UserPost['Username'],$UserPost['Password'])->result();
-		$this->response($User, 200);
+    $this->response($User, 200);
 	}
 }

@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(Pembelians,index) in Pembelians">
+          <tr v-for="(Pembelians,index) in Pembelians" :key="index">
             <td>{{index + 1}}</td>
             <td>{{Pembelians.TanggalPembelian | formatDate}}</td>
             <td>{{Pembelians.NamaSupplier}}</td>

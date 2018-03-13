@@ -67,7 +67,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #app {
   /* display: flex; */
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -80,7 +80,7 @@ export default {
  #sidebar {
   /* display: flex; */
   /* width: 17em; */
-  background: #5c9feb;
+  background: #eee;
   background: with;
   /* height: 100vh; */
   /* position:absolute; */
@@ -88,6 +88,8 @@ export default {
   /* top:0px; */
   /* left:-200px; */
   position: relative;
+      max-height: 100vh;
+    padding: 0;
 }
 #sidebar.active{
   /* display: block; */
@@ -122,10 +124,12 @@ cursor:pointer;
 }
 #sidebar div.list{
   /* margin-top: 50px; */
+  overflow-y: scroll;
+    max-height: 90%;
+    margin-top: 3em;
 }
 #sidebar div.list div.item {
 padding:15px 10px;
-border-bottom:1px solid #444;
 color:#fcfcfc;
 text-transform:uppercase;
 font-size:15px;
